@@ -330,7 +330,14 @@ textarea.fc{resize:vertical;min-height:75px;}
 <div class="modal">
   <h2>📁 <span id="mp-title">Novo Processo</span></h2>
   <input type="hidden" id="mp-id">
-  <div class="fg"><label>Número CNJ *</label><input class="fc" id="mp-num" placeholder="0000000-00.0000.8.16.0001"></div>
+  <div class="fg">
+    <label>Número CNJ *</label>
+    <div style="display:flex;gap:8px;align-items:center">
+      <input class="fc" id="mp-num" placeholder="0000000-00.0000.8.16.0001" style="flex:1" oninput="clearTimeout(this._t);this._t=setTimeout(()=>buscarDatajud(this.value),900)">
+      <button class="btn bg" type="button" onclick="buscarDatajud(document.getElementById('mp-num').value)" style="flex-shrink:0;white-space:nowrap">🔍 Buscar dados</button>
+    </div>
+    <div id="djud-status" style="font-size:11.5px;margin-top:5px;color:var(--text-muted)"></div>
+  </div>
   <div class="frow">
     <div class="fg"><label>Cliente</label><select class="fc" id="mp-cli"></select></div>
     <div class="fg"><label>Área</label><select class="fc" id="mp-area"><option>Cível</option><option>Trabalhista</option><option>Criminal</option><option>Família</option><option>Previdenciário</option><option>Tributário</option><option>Outro</option></select></div>
@@ -869,6 +876,196 @@ function fproc(v,b,t){
   if((t==='s'&&PFS)||(t==='a'&&PFA))b.classList.add('active');
   renderProcs();
 }
+
+// ══════════════════════════════════════════════
+// DATAJUD — BUSCA AUTOMÁTICA DE PROCESSO (CNJ)
+// ══════════════════════════════════════════════
+
+// Mapa: código do tribunal no número CNJ → sigla do endpoint DataJud
+const TRIB_MAP = {
+  // Justiça Estadual (J=8)
+  '8.01':'tjac','8.02':'tjal','8.03':'tjap','8.04':'tjam','8.05':'tjba',
+  '8.06':'tjce','8.07':'tjdft','8.08':'tjes','8.09':'tjgo','8.10':'tjma',
+  '8.11':'tjmt','8.12':'tjms','8.13':'tjmg','8.14':'tjpa','8.15':'tjpb',
+  '8.16':'tjpr','8.17':'tjpe','8.18':'tjpi','8.19':'tjrj','8.20':'tjrn',
+  '8.21':'tjrs','8.22':'tjro','8.23':'tjrr','8.24':'tjsc','8.25':'tjse',
+  '8.26':'tjsp','8.27':'tjto',
+  // Justiça do Trabalho (J=5)
+  '5.01':'trt1','5.02':'trt2','5.03':'trt3','5.04':'trt4','5.05':'trt5',
+  '5.06':'trt6','5.07':'trt7','5.08':'trt8','5.09':'trt9','5.10':'trt10',
+  '5.11':'trt11','5.12':'trt12','5.13':'trt13','5.14':'trt14','5.15':'trt15',
+  '5.16':'trt16','5.17':'trt17','5.18':'trt18','5.19':'trt19','5.20':'trt20',
+  '5.21':'trt21','5.22':'trt22','5.23':'trt23','5.24':'trt24',
+  // Justiça Federal (J=4)
+  '4.01':'trf1','4.02':'trf2','4.03':'trf3','4.04':'trf4','4.05':'trf5','4.06':'trf6',
+  // Superiores
+  '3.00':'stj','1.00':'stf','5.00':'tst',
+};
+
+// Mapa de sigla DataJud → sigla legível para o campo Tribunal
+const TRIB_LABEL = {
+  tjpr:'TJPR',tjsp:'TJSP',tjrj:'TJRJ',tjmg:'TJMG',tjrs:'TJRS',tjsc:'TJSC',
+  tjba:'TJBA',tjce:'TJCE',tjpe:'TJPE',tjgo:'TJGO',tjma:'TJMA',tjmt:'TJMT',
+  tjes:'TJES',tjdf:'TJDFT',tjpa:'TJPA',tjpb:'TJPB',tjpi:'TJPI',tjrn:'TJRN',
+  tjro:'TJRO',tjrr:'TJRR',tjse:'TJSE',tjto:'TJTO',tjal:'TJAL',tjap:'TJAP',
+  tjac:'TJAC',tjam:'TJAM',tjms:'TJMS',
+  trt1:'TRT1',trt2:'TRT2',trt3:'TRT3',trt4:'TRT4',trt5:'TRT5',trt6:'TRT6',
+  trt7:'TRT7',trt8:'TRT8',trt9:'TRT9',trt10:'TRT10',trt11:'TRT11',trt12:'TRT12',
+  trt13:'TRT13',trt14:'TRT14',trt15:'TRT15',trt16:'TRT16',trt17:'TRT17',
+  trt18:'TRT18',trt19:'TRT19',trt20:'TRT20',trt21:'TRT21',trt22:'TRT22',
+  trt23:'TRT23',trt24:'TRT24',
+  trf1:'TRF1',trf2:'TRF2',trf3:'TRF3',trf4:'TRF4',trf5:'TRF5',trf6:'TRF6',
+  stj:'STJ',stf:'STF',tst:'TST',
+};
+
+const DATAJUD_KEY = 'cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==';
+
+function detectarTribunal(numero){
+  // Formato: 0000000-00.AAAA.J.TT.OOOO
+  const m = numero.match(/\d{7}-\d{2}\.\d{4}\.(\d{1,2})\.(\d{2})\./);
+  if(!m) return null;
+  const chave = `${m[1]}.${m[2].replace(/^0/,'')}`;
+  const chave2 = `${m[1]}.${m[2]}`;
+  return TRIB_MAP[chave] || TRIB_MAP[chave2] || null;
+}
+
+function djStatus(msg, tipo='info'){
+  const el = document.getElementById('djud-status');
+  if(!el) return;
+  const cor = tipo==='ok'?'var(--success)':tipo==='err'?'var(--danger)':'var(--text-muted)';
+  el.style.color = cor;
+  el.textContent = msg;
+}
+
+async function buscarDatajud(numero){
+  if(!numero || numero.length < 20) return;
+  // Valida formato CNJ
+  if(!/\d{7}-\d{2}\.\d{4}\.\d{1,2}\.\d{2}\.\d{4}/.test(numero)) return;
+
+  const tribunal = detectarTribunal(numero);
+  if(!tribunal){
+    djStatus('Tribunal não identificado no número CNJ','err');
+    return;
+  }
+
+  djStatus(`🔄 Consultando ${TRIB_LABEL[tribunal]||tribunal} no DataJud/CNJ...`);
+
+  const endpoint = `https://api-publica.datajud.cnj.jus.br/api_publica_${tribunal}/_search`;
+  const body = JSON.stringify({
+    query: { match: { numeroProcesso: numero } },
+    size: 1
+  });
+
+  // Tenta direto, depois via proxy CORS se necessário
+  const urls = [
+    { url: endpoint, direct: true },
+    { url: `https://corsproxy.io/?${encodeURIComponent(endpoint)}`, direct: false },
+    { url: `https://api.allorigins.win/raw?url=${encodeURIComponent(endpoint+'?body='+encodeURIComponent(body))}`, direct: false },
+  ];
+
+  let data = null;
+  for(const u of urls){
+    try {
+      const resp = await fetch(u.url, {
+        method: u.direct ? 'POST' : 'POST',
+        headers: {
+          'Authorization': `APIKey ${DATAJUD_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: body,
+        signal: AbortSignal.timeout(8000),
+      });
+      if(resp.ok){
+        data = await resp.json();
+        break;
+      }
+    } catch(e) { continue; }
+  }
+
+  if(!data){
+    djStatus('⚠️ DataJud indisponível. Preencha manualmente ou tente novamente.','err');
+    return;
+  }
+
+  const hits = data?.hits?.hits || [];
+  if(!hits.length){
+    djStatus('⚠️ Processo não encontrado no DataJud. Verifique o número ou preencha manualmente.','err');
+    return;
+  }
+
+  const src = hits[0]._source;
+  preencherFormularioProcesso(src, tribunal);
+}
+
+function preencherFormularioProcesso(src, tribunal){
+  // Classe processual → tipo de ação
+  const classeNome = src.classe?.nome || '';
+  // Assuntos
+  const assunto = src.assuntos?.map(a=>a.nome).join(', ') || '';
+  // Órgão julgador
+  const orgao = src.orgaoJulgador?.nome || '';
+  const comarca = src.orgaoJulgador?.codigoMunicipioIBGE ? '' : (src.orgaoJulgador?.nome?.replace(/\d+[ªa°].*vara.*/i,'').trim() || '');
+  // Data de ajuizamento
+  const dataAdj = src.dataAjuizamento ? src.dataAjuizamento.split('T')[0] : '';
+  // Partes
+  const partes = src.partes || [];
+  const polo_passivo = partes.filter(p=>p.polo==='PASSIVO').map(p=>p.nome).join(', ');
+  const polo_ativo   = partes.filter(p=>p.polo==='ATIVO').map(p=>p.nome).join(', ');
+  // Movimentos (andamentos)
+  const movs = src.movimentos || [];
+
+  // Preenche campos do formulário
+  if(orgao) {
+    // Tenta extrair vara do nome do órgão
+    const varaMatch = orgao.match(/(\d+[ªa°]?\.?\s+vara[^,]*)/i);
+    if(varaMatch) document.getElementById('mp-vara').value = varaMatch[0].trim();
+    else document.getElementById('mp-vara').value = orgao;
+  }
+
+  // Preenche tribunal
+  const tribLabel = TRIB_LABEL[tribunal] || tribunal.toUpperCase();
+  const tribSel = document.getElementById('mp-trib');
+  for(const opt of tribSel.options){
+    if(opt.value === tribLabel || opt.text === tribLabel){ tribSel.value = opt.value; break; }
+  }
+
+  // Tipo de ação = classe
+  if(classeNome) document.getElementById('mp-tipo').value = classeNome;
+
+  // Assunto → Observações
+  if(assunto) document.getElementById('mp-obs').value = `Assunto: ${assunto}`;
+
+  // Parte contrária = polo passivo
+  if(polo_passivo) document.getElementById('mp-parte').value = polo_passivo;
+
+  // Data de distribuição
+  if(dataAdj) document.getElementById('mp-data').value = dataAdj;
+
+  // Valor da causa
+  if(src.valorCausa) document.getElementById('mp-valor').value = src.valorCausa;
+
+  // Comarca: tenta extrair município do nome do órgão
+  const mun = orgao.match(/comarca\s+de\s+([^\-,]+)/i) || orgao.match(/([A-ZÀ-Ú][a-zà-ú]+(?:\s+[A-ZÀ-Ú][a-zà-ú]+)*)$/);
+  if(mun) document.getElementById('mp-comarca').value = mun[1].trim();
+
+  // Área: tenta inferir pelo tribunal
+  if(tribunal.startsWith('trt')){
+    document.getElementById('mp-area').value = 'Trabalhista';
+  } else if(tribunal==='stj'||tribunal==='stf'){
+    document.getElementById('mp-area').value = 'Cível';
+  }
+
+  // Salva movimentos para inserir como andamentos depois
+  window._djMovimentos = movs.slice(0,20).map(m=>({
+    descricao: m.nome || m.complementosTabelados?.map(c=>c.nome).join(', ') || 'Movimentação',
+    data: m.dataHora ? m.dataHora.split('T')[0] : '',
+  }));
+  window._djTribunal = tribLabel;
+
+  djStatus(`✅ Dados preenchidos! ${partes.length} parte(s) · ${movs.length} movimentação(ões) · ${TRIB_LABEL[tribunal]||tribunal.toUpperCase()}`, 'ok');
+  notif(`✅ Processo encontrado no DataJud — ${classeNome||'dados preenchidos'}!`);
+}
+
 function openModalProcesso(){
   document.getElementById('mp-id').value='';
   document.getElementById('mp-title').textContent='Novo Processo';
@@ -912,7 +1109,20 @@ async function salvarProcesso(){
   const d={numero:document.getElementById('mp-num').value,cliente_id:parseInt(document.getElementById('mp-cli').value)||null,area:document.getElementById('mp-area').value,vara:document.getElementById('mp-vara').value,tribunal:document.getElementById('mp-trib').value,comarca:document.getElementById('mp-comarca').value,tipo_acao:document.getElementById('mp-tipo').value,parte_contraria:document.getElementById('mp-parte').value,valor_causa:parseFloat(document.getElementById('mp-valor').value)||null,data_distribuicao:document.getElementById('mp-data').value||null,observacoes:document.getElementById('mp-obs').value,status:'ativo',criado_em:new Date().toISOString()};
   if(!d.numero){notif('Informe o número CNJ',true);return;}
   if(id)d.id=parseInt(id);
-  await put('processos',d);notif('Processo salvo!');cm('m-processo');renderProcs();
+  const novoId = await put('processos',d);
+  // Importa andamentos do DataJud se disponíveis
+  if(window._djMovimentos && window._djMovimentos.length){
+    let nMov=0;
+    for(const mv of window._djMovimentos){
+      await put('andamentos',{processo_id:novoId,tipo:'doj',descricao:(window._djTribunal?'['+window._djTribunal+'] ':'')+mv.descricao,data_andamento:mv.data||td(),criado_em:new Date().toISOString()});
+      nMov++;
+    }
+    const nn=nMov; window._djMovimentos=null;
+    notif('Processo salvo com '+nn+' andamentos do DataJud!');
+  } else {
+    notif('Processo salvo!');
+  }
+  cm('m-processo');renderProcs();
 }
 
 // ══════════════════════════════════════════════
