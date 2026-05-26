@@ -6,358 +6,318 @@
 <title>Vinicius Abucarma — Sistema Jurídico</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
-:root{
-  --navy:#0f1e2e;--navy-mid:#162840;--navy-light:#1e3a56;
-  --gold:#c9a84c;--gold-light:#e8c96a;--gold-pale:#fdf3dc;
-  --cream:#f5f0e8;--cream-dark:#e8e0d0;
-  --text-main:#1a1a2e;--text-muted:#6b7a8d;
-  --danger:#c0392b;--danger-pale:#fde8e8;
-  --success:#1a7a4a;--success-pale:#e0f2ea;
-  --warning:#e67e22;--warning-pale:#fef3e2;
-  --blue:#2558c8;--blue-pale:#e8f0fe;
-  --sidebar-w:224px;--radius:10px;
-}
+:root{--navy:#0f1e2e;--navy-light:#1e3a56;--gold:#c9a84c;--gold-light:#e8c96a;--gold-pale:#fdf3dc;--cream:#f5f0e8;--cream-dark:#e8e0d0;--text-main:#1a1a2e;--text-muted:#6b7a8d;--danger:#c0392b;--danger-pale:#fde8e8;--success:#1a7a4a;--success-pale:#e0f2ea;--warning:#e67e22;--blue:#2558c8;--blue-pale:#e8f0fe;--sw:220px;--r:10px;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text-main);display:flex;height:100vh;overflow:hidden;font-size:13px;}
-.sidebar{width:var(--sidebar-w);background:var(--navy);display:flex;flex-direction:column;flex-shrink:0;position:relative;overflow:hidden;}
-.sidebar::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.12) 0%,transparent 70%);pointer-events:none;}
-.brand{padding:22px 20px 16px;border-bottom:1px solid rgba(201,168,76,.2);}
-.brand-logo{display:flex;align-items:center;gap:10px;}
-.brand-icon{width:38px;height:38px;background:var(--gold);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.brand-text h1{font-family:'Playfair Display',serif;font-size:13.5px;color:var(--cream);font-weight:700;line-height:1.3;}
-.brand-text p{font-size:10px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-top:1px;}
-.nav{padding:14px 10px;flex:1;overflow-y:auto;}
-.nav-section{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,168,76,.45);padding:10px 10px 5px;font-weight:600;}
+.sidebar{width:var(--sw);background:var(--navy);display:flex;flex-direction:column;flex-shrink:0;}
+.brand{padding:20px 18px 16px;border-bottom:1px solid rgba(201,168,76,.2);display:flex;align-items:center;gap:10px;}
+.brand-icon{width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.brand h1{font-family:'Playfair Display',serif;font-size:13px;color:var(--cream);font-weight:700;line-height:1.3;}
+.brand p{font-size:9px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-weight:500;}
+.nav{padding:12px 8px;flex:1;overflow-y:auto;}
+.nav-sec{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(201,168,76,.4);padding:10px 8px 4px;font-weight:600;}
 .nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;cursor:pointer;color:rgba(245,240,232,.6);font-size:12.5px;margin-bottom:1px;position:relative;transition:all .18s;user-select:none;}
 .nav-item:hover{background:rgba(255,255,255,.06);color:var(--cream);}
 .nav-item.active{background:rgba(201,168,76,.14);color:var(--gold-light);}
-.nav-item.active::before{content:'';position:absolute;left:0;top:22%;bottom:22%;width:3px;background:var(--gold);border-radius:0 3px 3px 0;}
-.nav-icon{font-size:15px;width:19px;text-align:center;}
-.badge{margin-left:auto;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700;line-height:1.5;}
-.badge-r{background:var(--danger);color:white;}
-.badge-w{background:var(--warning);color:white;}
-.sidebar-footer{padding:14px 18px;border-top:1px solid rgba(201,168,76,.15);display:flex;align-items:center;gap:10px;}
-.avatar{width:33px;height:33px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8b6914);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy);font-size:12px;flex-shrink:0;}
-.user-info p{color:var(--cream);font-size:12px;font-weight:500;}
-.user-info span{color:var(--text-muted);font-size:10px;}
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
-.topbar{background:white;border-bottom:1px solid var(--cream-dark);padding:12px 22px;display:flex;align-items:center;gap:14px;flex-shrink:0;}
-.topbar h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--navy);flex:1;white-space:nowrap;}
-.topbar-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-.search-box{display:flex;align-items:center;gap:7px;background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--text-muted);}
-.search-box input{border:none;background:transparent;outline:none;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text-main);width:180px;}
-.content{flex:1;overflow-y:auto;padding:22px;background:var(--cream);}
-.btn{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;transition:all .18s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
-.btn-gold{background:var(--gold);color:var(--navy);}
-.btn-gold:hover{background:var(--gold-light);}
-.btn-navy{background:var(--navy);color:white;}
-.btn-outline{background:transparent;border:1.5px solid var(--cream-dark);color:var(--text-muted);}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
-.btn-ghost{background:transparent;border:none;color:var(--text-muted);padding:6px 10px;cursor:pointer;}
-.btn-ghost:hover{color:var(--navy);}
-.btn-sm{padding:5px 11px;font-size:11.5px;}
-.btn-success{background:var(--success);color:white;}
-.btn-danger{background:var(--danger);color:white;}
+.nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--gold);border-radius:0 3px 3px 0;}
+.nav-icon{font-size:14px;width:18px;text-align:center;}
+.badge{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:10px;font-weight:700;}
+.br{background:var(--danger);color:white;}
+.bw{background:var(--warning);color:white;}
+.sfooter{padding:12px 16px;border-top:1px solid rgba(201,168,76,.15);display:flex;align-items:center;gap:10px;}
+.av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8b6914);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy);font-size:12px;flex-shrink:0;}
+.ui p{color:var(--cream);font-size:11.5px;font-weight:500;}
+.ui span{color:var(--text-muted);font-size:10px;}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.topbar{background:white;border-bottom:1px solid var(--cream-dark);padding:12px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.topbar h2{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--navy);flex:1;}
+.sbox{display:flex;align-items:center;gap:6px;background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:8px;padding:6px 11px;}
+.sbox input{border:none;background:transparent;outline:none;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--text-main);width:170px;}
+.content{flex:1;overflow-y:auto;padding:20px;}
+.btn{padding:7px 15px;border-radius:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;transition:all .18s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+.bg{background:var(--gold);color:var(--navy);}.bg:hover{background:var(--gold-light);}
+.bo{background:transparent;border:1.5px solid var(--cream-dark);color:var(--text-muted);}.bo:hover{border-color:var(--gold);color:var(--gold);}
+.bs{background:var(--success);color:white;}
+.bsm{padding:4px 10px;font-size:11px;}
 .panel{display:none;}.panel.active{display:block;}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
-.stat-card{background:white;border-radius:var(--radius);padding:18px;border:1px solid var(--cream-dark);position:relative;overflow:hidden;}
-.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);opacity:.35;}
-.stat-card.c-danger::after{background:var(--danger);opacity:1;}
-.stat-card.c-success::after{background:var(--success);opacity:1;}
-.stat-label{font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:7px;}
-.stat-value{font-family:'Playfair Display',serif;font-size:27px;font-weight:700;color:var(--navy);}
-.stat-value.sm{font-size:20px;}
-.stat-sub{font-size:11px;color:var(--text-muted);margin-top:4px;}
-.stat-icon{position:absolute;top:16px;right:16px;font-size:21px;opacity:.12;}
-.col3l{display:grid;grid-template-columns:1.7fr 1fr;gap:16px;}
-.card{background:white;border-radius:var(--radius);border:1px solid var(--cream-dark);overflow:hidden;margin-bottom:16px;}
-.card-header{padding:14px 18px;border-bottom:1px solid var(--cream-dark);display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.card-header h3{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--navy);}
-.list-item{padding:12px 18px;border-bottom:1px solid var(--cream-dark);display:flex;align-items:center;gap:11px;cursor:pointer;transition:background .15s;}
-.list-item:last-child{border-bottom:none;}
-.list-item:hover{background:var(--cream);}
-.item-title{font-size:13px;font-weight:500;color:var(--text-main);margin-bottom:2px;}
-.item-sub{font-size:11px;color:var(--text-muted);}
-.mono{font-family:monospace;font-size:11.5px;}
-.tag{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:600;letter-spacing:.03em;white-space:nowrap;}
-.tag-r{background:var(--danger-pale);color:var(--danger);}
-.tag-g{background:var(--success-pale);color:var(--success);}
-.tag-gold{background:var(--gold-pale);color:#8b6914;}
-.tag-b{background:var(--blue-pale);color:var(--blue);}
-.tag-gray{background:#f0f0f0;color:#666;}
-.filters{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;}
-.filter-btn{padding:5px 13px;border-radius:20px;border:1.5px solid var(--cream-dark);background:white;cursor:pointer;font-size:12px;color:var(--text-muted);font-family:'DM Sans',sans-serif;transition:all .18s;}
-.filter-btn.active{border-color:var(--navy);background:var(--navy);color:white;}
-.filter-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
-.pub-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);border-radius:var(--radius);padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;gap:16px;color:white;}
-.pub-banner-icon{font-size:28px;flex-shrink:0;}
-.pub-banner h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--gold-light);margin-bottom:3px;}
-.pub-banner p{font-size:11.5px;opacity:.8;}
-.pub-item{background:white;border-radius:var(--radius);border:1px solid var(--cream-dark);padding:15px 18px;margin-bottom:10px;transition:all .2s;}
-.pub-item:hover{border-color:var(--gold);box-shadow:0 2px 14px rgba(201,168,76,.1);}
-.pub-item.nova{border-left:4px solid var(--gold);}
-.pub-item.importada{opacity:.65;}
-.pub-header{display:flex;align-items:center;gap:9px;margin-bottom:8px;flex-wrap:wrap;}
-.pub-body{font-size:12px;color:var(--text-muted);line-height:1.65;margin-bottom:10px;}
-.pub-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.agenda-wrap{display:grid;grid-template-columns:290px 1fr;gap:18px;}
-.mini-cal{background:white;border-radius:var(--radius);border:1px solid var(--cream-dark);padding:16px;}
-.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.cal-nav h3{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;}
-.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
-.cal-dn{text-align:center;font-size:9.5px;color:var(--text-muted);font-weight:600;text-transform:uppercase;padding:4px 2px;}
-.cal-d{text-align:center;padding:7px 3px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text-main);position:relative;transition:all .15s;}
-.cal-d:hover{background:var(--cream);}
-.cal-d.today{background:var(--navy);color:white;font-weight:700;}
-.cal-d.has-ev::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--gold);}
-.cal-d.has-urg::after{background:var(--danger);}
-.cal-d.other{color:#ccc;cursor:default;}
-.ev-list{display:flex;flex-direction:column;gap:9px;}
-.ev-card{background:white;border-radius:var(--radius);border:1px solid var(--cream-dark);padding:13px 16px;display:flex;gap:13px;cursor:pointer;transition:all .18s;}
-.ev-card:hover{border-color:var(--gold);}
-.ev-time{text-align:center;min-width:44px;border-radius:8px;padding:8px 5px;flex-shrink:0;}
-.ev-time .day{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1;}
-.ev-time .mon{font-size:9px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;opacity:.7;}
-.ev-body{flex:1;min-width:0;}
-.ev-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ev-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--text-muted);}
-.proc-table{background:white;border-radius:var(--radius);border:1px solid var(--cream-dark);overflow:hidden;}
-.th{display:grid;grid-template-columns:2.2fr 1.8fr 1.5fr 0.9fr 1fr 70px;padding:10px 18px;background:var(--cream);border-bottom:1px solid var(--cream-dark);font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;}
-.tr{display:grid;grid-template-columns:2.2fr 1.8fr 1.5fr 0.9fr 1fr 70px;padding:12px 18px;border-bottom:1px solid var(--cream-dark);align-items:center;cursor:pointer;transition:background .14s;}
-.tr:last-child{border-bottom:none;}
-.tr:hover{background:var(--cream);}
-.tr>*{min-width:0;overflow:hidden;}
-.ct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.ct-card{background:white;border-radius:var(--radius);border:1px solid var(--cream-dark);padding:18px;cursor:pointer;transition:all .18s;}
-.ct-card:hover{border-color:var(--gold);box-shadow:0 3px 14px rgba(201,168,76,.1);}
-.ct-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
-.ct-icon{font-size:26px;}
-.ct-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:5px;line-height:1.3;}
-.ct-client{font-size:12px;color:var(--text-muted);margin-bottom:3px;}
-.ct-footer{display:flex;justify-content:space-between;align-items:center;padding-top:11px;border-top:1px solid var(--cream-dark);margin-top:10px;}
-.ct-value{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy);}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px;}
+.sc{background:white;border-radius:var(--r);padding:17px;border:1px solid var(--cream-dark);position:relative;overflow:hidden;}
+.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);opacity:.3;}
+.sc.cd::after{background:var(--danger);opacity:1;}
+.sc.cs::after{background:var(--success);opacity:1;}
+.sl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:6px;}
+.sv{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);}
+.sv.sm{font-size:19px;}
+.ss{font-size:10.5px;color:var(--text-muted);margin-top:3px;}
+.si{position:absolute;top:14px;right:14px;font-size:20px;opacity:.1;}
+.col2{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;}
+.card{background:white;border-radius:var(--r);border:1px solid var(--cream-dark);overflow:hidden;margin-bottom:14px;}
+.ch{padding:13px 17px;border-bottom:1px solid var(--cream-dark);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.ch h3{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--navy);}
+.li{padding:11px 17px;border-bottom:1px solid var(--cream-dark);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;}
+.li:last-child{border-bottom:none;}.li:hover{background:var(--cream);}
+.it{font-size:12.5px;font-weight:500;color:var(--text-main);margin-bottom:2px;}
+.is{font-size:11px;color:var(--text-muted);}
+.mono{font-family:monospace;font-size:11px;}
+.tag{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:600;white-space:nowrap;}
+.tr{background:var(--danger-pale);color:var(--danger);}
+.tg{background:var(--success-pale);color:var(--success);}
+.to{background:var(--gold-pale);color:#8b6914;}
+.tb{background:var(--blue-pale);color:var(--blue);}
+.tgr{background:#f0f0f0;color:#666;}
+.filters{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.fb{padding:5px 12px;border-radius:20px;border:1.5px solid var(--cream-dark);background:white;cursor:pointer;font-size:11.5px;color:var(--text-muted);font-family:'DM Sans',sans-serif;transition:all .18s;}
+.fb.active{border-color:var(--navy);background:var(--navy);color:white;}
+.fb:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.pub-banner{background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--r);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:14px;color:white;}
+.pub-banner h3{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-light);margin-bottom:3px;}
+.pub-banner p{font-size:11px;opacity:.8;}
+.pi{background:white;border-radius:var(--r);border:1px solid var(--cream-dark);padding:14px 17px;margin-bottom:9px;transition:all .2s;}
+.pi:hover{border-color:var(--gold);}
+.pi.nova{border-left:4px solid var(--gold);}
+.pi.importada{opacity:.6;}
+.ph{display:flex;align-items:center;gap:8px;margin-bottom:7px;flex-wrap:wrap;}
+.pb{font-size:11.5px;color:var(--text-muted);line-height:1.6;margin-bottom:9px;}
+.pa{display:flex;gap:7px;flex-wrap:wrap;}
+.agwrap{display:grid;grid-template-columns:280px 1fr;gap:16px;}
+.mcal{background:white;border-radius:var(--r);border:1px solid var(--cream-dark);padding:14px;}
+.cnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
+.cnav h3{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;}
+.cnav button{border:none;background:none;cursor:pointer;color:var(--text-muted);font-size:16px;padding:2px 6px;}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cdn{text-align:center;font-size:9px;color:var(--text-muted);font-weight:600;text-transform:uppercase;padding:3px;}
+.cd2{text-align:center;padding:6px 2px;border-radius:5px;font-size:11.5px;cursor:pointer;color:var(--text-main);position:relative;transition:all .15s;}
+.cd2:hover{background:var(--cream);}
+.cd2.today{background:var(--navy);color:white;font-weight:700;}
+.cd2.hev::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--gold);}
+.cd2.hurg::after{background:var(--danger);}
+.cd2.other{color:#ccc;cursor:default;}
+.evlist{display:flex;flex-direction:column;gap:8px;}
+.evc{background:white;border-radius:var(--r);border:1px solid var(--cream-dark);padding:12px 15px;display:flex;gap:12px;cursor:pointer;transition:all .18s;}
+.evc:hover{border-color:var(--gold);}
+.et{text-align:center;min-width:42px;border-radius:7px;padding:7px 4px;flex-shrink:0;}
+.et .day{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;line-height:1;}
+.et .mon{font-size:9px;text-transform:uppercase;letter-spacing:.05em;font-weight:600;opacity:.7;}
+.eb{flex:1;min-width:0;}
+.etit{font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.emeta{display:flex;gap:7px;align-items:center;flex-wrap:wrap;font-size:10.5px;color:var(--text-muted);}
+.ptable{background:white;border-radius:var(--r);border:1px solid var(--cream-dark);overflow:hidden;}
+.th2{display:grid;grid-template-columns:2fr 1.8fr 1.4fr 0.9fr 1fr 65px;padding:9px 17px;background:var(--cream);border-bottom:1px solid var(--cream-dark);font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;}
+.tr2{display:grid;grid-template-columns:2fr 1.8fr 1.4fr 0.9fr 1fr 65px;padding:11px 17px;border-bottom:1px solid var(--cream-dark);align-items:center;cursor:pointer;transition:background .14s;}
+.tr2:last-child{border-bottom:none;}.tr2:hover{background:var(--cream);}
+.tr2>*{min-width:0;overflow:hidden;}
+.ctgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.ctcard{background:white;border-radius:var(--r);border:1px solid var(--cream-dark);padding:17px;cursor:pointer;transition:all .18s;}
+.ctcard:hover{border-color:var(--gold);box-shadow:0 3px 12px rgba(201,168,76,.1);}
+.cttop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px;}
+.cticon{font-size:24px;}
+.cttit{font-family:'Playfair Display',serif;font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.3;}
+.ctcli{font-size:11.5px;color:var(--text-muted);margin-bottom:3px;}
+.ctfooter{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--cream-dark);margin-top:9px;}
+.ctval{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);}
 .overlay{display:none;position:fixed;inset:0;background:rgba(15,30,46,.65);z-index:1000;align-items:center;justify-content:center;padding:20px;}
 .overlay.open{display:flex;}
-.modal{background:white;border-radius:14px;padding:26px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);}
-.modal h2{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
-.form-group{margin-bottom:14px;}
-.form-group label{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:5px;}
-.form-control{width:100%;padding:9px 13px;border:1.5px solid var(--cream-dark);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text-main);background:white;transition:border .18s;}
-.form-control:focus{outline:none;border-color:var(--gold);}
-textarea.form-control{resize:vertical;min-height:80px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.modal-actions{display:flex;gap:9px;margin-top:22px;justify-content:flex-end;}
-.info-box{background:var(--cream);border-radius:8px;padding:12px 14px;}
-.info-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:4px;}
-.info-value{font-size:13px;color:var(--text-main);font-weight:500;}
-.andamento-item{padding:11px 14px;border-left:3px solid var(--cream-dark);margin-bottom:8px;background:var(--cream);border-radius:0 8px 8px 0;}
-.andamento-item.doj{border-left-color:var(--gold);}
-.andamento-header{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
-.andamento-body{font-size:12px;color:var(--text-muted);line-height:1.6;}
-.notif{position:fixed;bottom:22px;right:22px;background:var(--navy);color:var(--cream);padding:13px 18px;border-radius:10px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 28px rgba(0,0,0,.3);z-index:3000;transform:translateY(110px);transition:transform .28s ease;border-left:4px solid var(--gold);max-width:360px;}
+.modal{background:white;border-radius:13px;padding:24px;width:100%;max-width:550px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.modal h2{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);margin-bottom:18px;}
+.fg{margin-bottom:13px;}
+.fg label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:4px;}
+.fc{width:100%;padding:8px 12px;border:1.5px solid var(--cream-dark);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12.5px;color:var(--text-main);background:white;transition:border .18s;}
+.fc:focus{outline:none;border-color:var(--gold);}
+textarea.fc{resize:vertical;min-height:75px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.mac{display:flex;gap:8px;margin-top:20px;justify-content:flex-end;}
+.ib{background:var(--cream);border-radius:8px;padding:11px 13px;}
+.ilabel{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:3px;}
+.ival{font-size:12.5px;color:var(--text-main);font-weight:500;}
+.andi{padding:10px 13px;border-left:3px solid var(--cream-dark);margin-bottom:7px;background:var(--cream);border-radius:0 8px 8px 0;}
+.andi.doj{border-left-color:var(--gold);}
+.andh{display:flex;align-items:center;gap:7px;margin-bottom:3px;}
+.andb{font-size:11.5px;color:var(--text-muted);line-height:1.6;}
+.notif{position:fixed;bottom:20px;right:20px;background:var(--navy);color:var(--cream);padding:12px 16px;border-radius:10px;font-size:12.5px;display:flex;align-items:center;gap:9px;box-shadow:0 8px 28px rgba(0,0,0,.3);z-index:3000;transform:translateY(110px);transition:transform .28s ease;border-left:4px solid var(--gold);max-width:340px;}
 .notif.show{transform:translateY(0);}
-.notif.error{border-left-color:var(--danger);}
-.loading{display:flex;align-items:center;justify-content:center;padding:48px;color:var(--text-muted);gap:10px;font-size:13px;}
-.spin{width:18px;height:18px;border:2px solid var(--cream-dark);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty{text-align:center;padding:40px 20px;color:var(--text-muted);}
-.empty .icon{font-size:36px;margin-bottom:10px;opacity:.4;}
-.prazo-bar{height:3px;background:var(--cream-dark);border-radius:2px;margin-top:7px;}
-.prazo-fill{height:100%;border-radius:2px;}
+.notif.err{border-left-color:var(--danger);}
+.empty{text-align:center;padding:36px 20px;color:var(--text-muted);}
+.empty .ei{font-size:32px;margin-bottom:9px;opacity:.4;}
+.pbar{height:3px;background:var(--cream-dark);border-radius:2px;margin-top:6px;}
+.pfill{height:100%;border-radius:2px;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:4px;}
-.tribunal-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;border:1.5px solid var(--cream-dark);background:white;cursor:pointer;font-size:11.5px;font-weight:500;transition:all .15s;}
-.tribunal-chip.sel{border-color:var(--gold);background:var(--gold-pale);color:#7a5c00;}
 </style>
 </head>
 <body>
-
 <aside class="sidebar">
   <div class="brand">
-    <div class="brand-logo">
-      <div class="brand-icon">⚖️</div>
-      <div class="brand-text"><h1>Vinicius Abucarma</h1><p>Advocacia</p></div>
-    </div>
+    <div class="brand-icon">⚖️</div>
+    <div><h1>Vinicius Abucarma</h1><p>Advocacia</p></div>
   </div>
   <nav class="nav">
-    <div class="nav-section">Principal</div>
-    <div class="nav-item active" data-panel="dashboard"><span class="nav-icon">🏠</span>Dashboard</div>
-    <div class="nav-item" data-panel="publicacoes"><span class="nav-icon">📰</span>Publicações DOJ<span class="badge badge-r" id="badge-pub">0</span></div>
-    <div class="nav-item" data-panel="agenda"><span class="nav-icon">📅</span>Agenda<span class="badge badge-w" id="badge-agenda">0</span></div>
-    <div class="nav-section">Jurídico</div>
-    <div class="nav-item" data-panel="processos"><span class="nav-icon">📁</span>Processos</div>
-    <div class="nav-item" data-panel="contratos"><span class="nav-icon">📝</span>Contratos</div>
-    <div class="nav-item" data-panel="clientes"><span class="nav-icon">👥</span>Clientes</div>
-    <div class="nav-section">Financeiro</div>
-    <div class="nav-item" data-panel="financeiro"><span class="nav-icon">💰</span>Honorários</div>
-    <div class="nav-section">Sistema</div>
-    <div class="nav-item" data-panel="config"><span class="nav-icon">⚙️</span>Configurações</div>
+    <div class="nav-sec">Principal</div>
+    <div class="nav-item active" data-p="dashboard"><span class="nav-icon">🏠</span>Dashboard</div>
+    <div class="nav-item" data-p="publicacoes"><span class="nav-icon">📰</span>Publicações DOJ<span class="badge br" id="bp">0</span></div>
+    <div class="nav-item" data-p="agenda"><span class="nav-icon">📅</span>Agenda<span class="badge bw" id="ba">0</span></div>
+    <div class="nav-sec">Jurídico</div>
+    <div class="nav-item" data-p="processos"><span class="nav-icon">📁</span>Processos</div>
+    <div class="nav-item" data-p="contratos"><span class="nav-icon">📝</span>Contratos</div>
+    <div class="nav-item" data-p="clientes"><span class="nav-icon">👥</span>Clientes</div>
+    <div class="nav-sec">Financeiro</div>
+    <div class="nav-item" data-p="financeiro"><span class="nav-icon">💰</span>Honorários</div>
+    <div class="nav-sec">Sistema</div>
+    <div class="nav-item" data-p="config"><span class="nav-icon">⚙️</span>Configurações</div>
   </nav>
-  <div class="sidebar-footer">
-    <div class="avatar">VA</div>
-    <div class="user-info"><p>Dr. Vinicius</p><span>OAB/PR 119.441</span></div>
+  <div class="sfooter">
+    <div class="av">VA</div>
+    <div class="ui"><p>Dr. Vinicius</p><span>OAB/PR 119.441</span></div>
   </div>
 </aside>
 
 <div class="main">
   <div class="topbar">
-    <h2 id="page-title">Dashboard</h2>
-    <div class="topbar-right">
-      <div class="search-box">🔍<input type="text" id="global-search" placeholder="Buscar processo, cliente..."></div>
-      <button class="btn btn-outline" onclick="syncDOJ()">⟳ Sync DOJ</button>
-      <button class="btn btn-gold" id="btn-novo-principal">+ Novo Processo</button>
+    <h2 id="ptitle">Dashboard</h2>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="sbox">🔍<input id="gsearch" placeholder="Buscar processo, cliente..."></div>
+      <button class="btn bo" onclick="syncDOJ()">⟳ Sync DOJ</button>
+      <button class="btn bg" id="btnovo">+ Novo</button>
     </div>
   </div>
   <div class="content">
 
-    <!-- DASHBOARD -->
     <div id="panel-dashboard" class="panel active">
-      <div class="stats-grid" id="dash-stats"><div class="loading" style="grid-column:1/-1"><div class="spin"></div></div></div>
-      <div class="col3l">
+      <div class="sgrid" id="dstats"></div>
+      <div class="col2">
         <div class="card">
-          <div class="card-header"><h3>⏰ Prazos Críticos</h3><button class="btn btn-sm btn-outline" onclick="nav('agenda')">Ver agenda</button></div>
-          <div id="dash-prazos"><div class="loading"><div class="spin"></div></div></div>
+          <div class="ch"><h3>⏰ Prazos Críticos</h3><button class="btn bo bsm" onclick="nav('agenda')">Ver agenda</button></div>
+          <div id="dprazos"></div>
         </div>
         <div class="card">
-          <div class="card-header"><h3>📰 Publicações</h3><button class="btn btn-sm btn-gold" onclick="nav('publicacoes')">Ver todas</button></div>
-          <div id="dash-pubs"><div class="loading"><div class="spin"></div></div></div>
+          <div class="ch"><h3>📰 Publicações</h3><button class="btn bg bsm" onclick="nav('publicacoes')">Ver todas</button></div>
+          <div id="dpubs"></div>
         </div>
       </div>
     </div>
 
-    <!-- PUBLICAÇÕES -->
     <div id="panel-publicacoes" class="panel">
       <div class="pub-banner">
-        <div class="pub-banner-icon">📡</div>
+        <div style="font-size:28px;flex-shrink:0">📡</div>
         <div style="flex:1">
           <h3>Monitor Nacional — Diários Oficiais de Justiça</h3>
-          <p id="sync-status">OAB/PR 119.441 — Vinicius Abucarma · 62 tribunais monitorados</p>
+          <p>OAB/PR 119.441 — Vinicius Abucarma · Baixe o PDF do tribunal e faça upload</p>
         </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap">
-          <label class="btn btn-outline" style="cursor:pointer">📄 Upload PDF<input type="file" id="pdf-upload" accept=".pdf" style="display:none" onchange="processarPDF(this)"></label>
-          <button class="btn btn-gold" onclick="syncDOJ()">⟳ Sincronizar</button>
+        <div style="display:flex;gap:8px;flex-shrink:0">
+          <label class="btn bo" style="cursor:pointer">📄 Upload PDF<input type="file" id="pdfup" accept=".pdf" style="display:none" onchange="processPDF(this)"></label>
+          <button class="btn bg" onclick="syncDOJ()">⟳ Sincronizar</button>
         </div>
       </div>
-      <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+      <div style="display:flex;gap:8px;margin-bottom:13px;flex-wrap:wrap;align-items:center">
         <div class="filters" style="margin:0">
-          <button class="filter-btn active" onclick="filterPubs('',this)">Todas</button>
-          <button class="filter-btn" onclick="filterPubs('nova',this)">Novas</button>
-          <button class="filter-btn" onclick="filterPubs('lida',this)">Lidas</button>
-          <button class="filter-btn" onclick="filterPubs('importada',this)">Importadas</button>
+          <button class="fb active" onclick="fpubs('',this)">Todas</button>
+          <button class="fb" onclick="fpubs('nova',this)">Novas</button>
+          <button class="fb" onclick="fpubs('lida',this)">Lidas</button>
+          <button class="fb" onclick="fpubs('importada',this)">Importadas</button>
         </div>
-        <select id="filtro-tribunal" class="form-control" style="width:auto;font-size:12px;padding:5px 10px" onchange="renderPubs()">
+        <select id="ftrib" class="fc" style="width:auto;font-size:11.5px;padding:4px 9px" onchange="renderPubs()">
           <option value="">Todos os tribunais</option>
         </select>
       </div>
-      <div id="pub-list"></div>
+      <div id="publist"></div>
     </div>
 
-    <!-- AGENDA -->
     <div id="panel-agenda" class="panel">
-      <div class="agenda-wrap">
+      <div class="agwrap">
         <div>
-          <div class="mini-cal">
-            <div class="cal-nav">
-              <button class="btn-ghost" onclick="calNav(-1)">‹</button>
-              <h3 id="cal-title"></h3>
-              <button class="btn-ghost" onclick="calNav(1)">›</button>
+          <div class="mcal">
+            <div class="cnav">
+              <button onclick="calNav(-1)">‹</button>
+              <h3 id="caltit"></h3>
+              <button onclick="calNav(1)">›</button>
             </div>
-            <div class="cal-days" id="cal-grid"></div>
-            <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--cream-dark)">
-              <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Legenda</div>
-              <div style="display:flex;flex-direction:column;gap:5px">
-                <div style="display:flex;align-items:center;gap:8px;font-size:11.5px"><span style="width:8px;height:8px;border-radius:50%;background:var(--danger);display:inline-block"></span>Prazo urgente</div>
-                <div style="display:flex;align-items:center;gap:8px;font-size:11.5px"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block"></span>Audiência/Evento</div>
-              </div>
+            <div class="cgrid" id="calgrid"></div>
+            <div style="margin-top:12px;padding-top:11px;border-top:1px solid var(--cream-dark);display:flex;flex-direction:column;gap:5px">
+              <div style="display:flex;align-items:center;gap:7px;font-size:11px"><span style="width:7px;height:7px;border-radius:50%;background:var(--danger);display:inline-block"></span>Prazo urgente</div>
+              <div style="display:flex;align-items:center;gap:7px;font-size:11px"><span style="width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block"></span>Audiência/Evento</div>
             </div>
           </div>
-          <button class="btn btn-gold" style="width:100%;margin-top:12px;justify-content:center" onclick="abrirModalAgenda()">+ Novo prazo / evento</button>
+          <button class="btn bg" style="width:100%;margin-top:11px;justify-content:center" onclick="openModalAgenda()">+ Novo prazo / evento</button>
         </div>
         <div>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--navy)">Próximos compromissos</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
+            <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--navy)">Próximos compromissos</div>
             <div class="filters" style="margin:0">
-              <button class="filter-btn active" onclick="filterAg('',this)">Todos</button>
-              <button class="filter-btn" onclick="filterAg('prazo',this)">Prazos</button>
-              <button class="filter-btn" onclick="filterAg('audiencia',this)">Audiências</button>
-              <button class="filter-btn" onclick="filterAg('reuniao',this)">Reuniões</button>
+              <button class="fb active" onclick="fag('',this)">Todos</button>
+              <button class="fb" onclick="fag('prazo',this)">Prazos</button>
+              <button class="fb" onclick="fag('audiencia',this)">Audiências</button>
+              <button class="fb" onclick="fag('reuniao',this)">Reuniões</button>
             </div>
           </div>
-          <div class="ev-list" id="ev-list"></div>
+          <div class="evlist" id="evlist"></div>
         </div>
       </div>
     </div>
 
-    <!-- PROCESSOS -->
     <div id="panel-processos" class="panel">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;flex-wrap:wrap;gap:9px">
         <div class="filters" style="margin:0">
-          <button class="filter-btn active" onclick="filterProc('',this,'status')">Todos</button>
-          <button class="filter-btn" onclick="filterProc('ativo',this,'status')">Ativos</button>
-          <button class="filter-btn" onclick="filterProc('aguardando',this,'status')">Aguardando</button>
-          <button class="filter-btn" onclick="filterProc('encerrado',this,'status')">Encerrados</button>
-          <button class="filter-btn" onclick="filterProc('Cível',this,'area')">Cível</button>
-          <button class="filter-btn" onclick="filterProc('Trabalhista',this,'area')">Trabalhista</button>
-          <button class="filter-btn" onclick="filterProc('Família',this,'area')">Família</button>
+          <button class="fb active" onclick="fproc('',this,'s')">Todos</button>
+          <button class="fb" onclick="fproc('ativo',this,'s')">Ativos</button>
+          <button class="fb" onclick="fproc('aguardando',this,'s')">Aguardando</button>
+          <button class="fb" onclick="fproc('encerrado',this,'s')">Encerrados</button>
+          <button class="fb" onclick="fproc('Cível',this,'a')">Cível</button>
+          <button class="fb" onclick="fproc('Trabalhista',this,'a')">Trabalhista</button>
+          <button class="fb" onclick="fproc('Família',this,'a')">Família</button>
         </div>
-        <button class="btn btn-gold" onclick="abrirModalProcesso()">+ Novo Processo</button>
+        <button class="btn bg" onclick="openModalProcesso()">+ Novo Processo</button>
       </div>
-      <div class="proc-table">
-        <div class="th"><span>Número</span><span>Cliente / Objeto</span><span>Vara</span><span>Área</span><span>Status</span><span></span></div>
-        <div id="proc-list"></div>
+      <div class="ptable">
+        <div class="th2"><span>Número</span><span>Cliente / Objeto</span><span>Vara</span><span>Área</span><span>Status</span><span></span></div>
+        <div id="proclist"></div>
       </div>
     </div>
 
-    <!-- CONTRATOS -->
     <div id="panel-contratos" class="panel">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:16px">
-        <button class="btn btn-gold" onclick="abrirModalContrato()">+ Novo Contrato</button>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+        <button class="btn bg" onclick="openModalContrato()">+ Novo Contrato</button>
       </div>
-      <div class="ct-grid" id="ct-list"></div>
+      <div class="ctgrid" id="ctlist"></div>
     </div>
 
-    <!-- CLIENTES -->
     <div id="panel-clientes" class="panel">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <div class="search-box" style="min-width:280px">🔍<input type="text" id="cli-search" placeholder="Buscar cliente..." oninput="renderClientes(this.value)"></div>
-        <button class="btn btn-gold" onclick="abrirModalCliente()">+ Novo Cliente</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div class="sbox" style="min-width:260px">🔍<input id="clisearch" placeholder="Buscar cliente..." oninput="renderClientes(this.value)"></div>
+        <button class="btn bg" onclick="openModalCliente()">+ Novo Cliente</button>
       </div>
-      <div class="card"><div id="cli-list"></div></div>
+      <div class="card"><div id="clilist"></div></div>
     </div>
 
-    <!-- FINANCEIRO -->
     <div id="panel-financeiro" class="panel">
-      <div class="stats-grid" id="fin-stats"></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div class="sgrid" id="finstats"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;flex-wrap:wrap;gap:8px">
         <div class="filters" style="margin:0">
-          <button class="filter-btn active" onclick="filterFin('',this)">Todos</button>
-          <button class="filter-btn" onclick="filterFin('receita',this)">Receitas</button>
-          <button class="filter-btn" onclick="filterFin('despesa',this)">Despesas</button>
-          <button class="filter-btn" onclick="filterFin('pendente',this)">A receber</button>
-          <button class="filter-btn" onclick="filterFin('pago',this)">Pagos</button>
+          <button class="fb active" onclick="ffin('',this)">Todos</button>
+          <button class="fb" onclick="ffin('receita',this)">Receitas</button>
+          <button class="fb" onclick="ffin('despesa',this)">Despesas</button>
+          <button class="fb" onclick="ffin('pendente',this)">A receber</button>
+          <button class="fb" onclick="ffin('pago',this)">Pagos</button>
         </div>
-        <button class="btn btn-gold" onclick="abrirModalLancamento()">+ Lançar</button>
+        <button class="btn bg" onclick="openModalLancamento()">+ Lançar</button>
       </div>
-      <div class="card"><div id="fin-list"></div></div>
+      <div class="card"><div id="finlist"></div></div>
     </div>
 
-    <!-- CONFIG -->
     <div id="panel-config" class="panel">
-      <div class="card" style="max-width:600px">
-        <div class="card-header"><h3>⚙️ Configurações do sistema</h3></div>
-        <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
-          <div class="form-group"><label>Nome do advogado</label><input class="form-control" id="cfg-nome" value="Vinicius Abucarma"></div>
-          <div class="form-group"><label>OAB</label><input class="form-control" id="cfg-oab" value="OAB/PR 119.441"></div>
-          <div class="form-group"><label>E-mail</label><input class="form-control" id="cfg-email" type="email"></div>
-          <div style="padding-top:14px;border-top:1px solid var(--cream-dark)">
-            <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:10px">BACKUP DOS DADOS</div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btn btn-outline" onclick="exportarDados()">⬇ Exportar backup (JSON)</button>
-              <label class="btn btn-outline" style="cursor:pointer">⬆ Importar backup<input type="file" accept=".json" style="display:none" onchange="importarDados(this)"></label>
+      <div class="card" style="max-width:580px">
+        <div class="ch"><h3>⚙️ Configurações</h3></div>
+        <div style="padding:18px;display:flex;flex-direction:column;gap:13px">
+          <div class="fg"><label>Nome do advogado</label><input class="fc" id="cfg-nome" value="Vinicius Abucarma"></div>
+          <div class="fg"><label>OAB</label><input class="fc" id="cfg-oab" value="OAB/PR 119.441"></div>
+          <div class="fg"><label>E-mail</label><input class="fc" id="cfg-email" type="email"></div>
+          <div style="padding-top:13px;border-top:1px solid var(--cream-dark)">
+            <div style="font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:9px;text-transform:uppercase;letter-spacing:.06em">Backup dos dados</div>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <button class="btn bo" onclick="exportar()">⬇ Exportar backup JSON</button>
+              <label class="btn bo" style="cursor:pointer">⬆ Importar backup<input type="file" accept=".json" style="display:none" onchange="importar(this)"></label>
             </div>
-            <p style="font-size:11px;color:var(--text-muted);margin-top:8px">⚠️ Faça backup semanalmente. Os dados ficam no seu navegador (IndexedDB).</p>
+            <p style="font-size:11px;color:var(--text-muted);margin-top:7px">⚠️ Faça backup semanalmente. Dados salvos no navegador (IndexedDB).</p>
           </div>
-          <button class="btn btn-gold" onclick="salvarConfig()" style="align-self:flex-start">✓ Salvar configurações</button>
+          <button class="btn bg" onclick="salvarCfg()" style="align-self:flex-start">✓ Salvar</button>
         </div>
       </div>
     </div>
@@ -366,703 +326,816 @@ textarea.form-control{resize:vertical;min-height:80px;}
 </div>
 
 <!-- MODAIS -->
-<div class="overlay" id="modal-processo">
+<div class="overlay" id="m-processo">
 <div class="modal">
-  <h2>📁 <span id="proc-modal-title">Novo Processo</span></h2>
-  <input type="hidden" id="proc-id">
-  <div class="form-group"><label>Número CNJ *</label><input class="form-control" id="proc-numero" placeholder="0000000-00.0000.8.16.0001"></div>
-  <div class="form-row">
-    <div class="form-group"><label>Cliente</label><select class="form-control" id="proc-cliente"></select></div>
-    <div class="form-group"><label>Área</label><select class="form-control" id="proc-area"><option>Cível</option><option>Trabalhista</option><option>Criminal</option><option>Família</option><option>Previdenciário</option><option>Tributário</option><option>Outro</option></select></div>
+  <h2>📁 <span id="mp-title">Novo Processo</span></h2>
+  <input type="hidden" id="mp-id">
+  <div class="fg"><label>Número CNJ *</label><input class="fc" id="mp-num" placeholder="0000000-00.0000.8.16.0001"></div>
+  <div class="frow">
+    <div class="fg"><label>Cliente</label><select class="fc" id="mp-cli"></select></div>
+    <div class="fg"><label>Área</label><select class="fc" id="mp-area"><option>Cível</option><option>Trabalhista</option><option>Criminal</option><option>Família</option><option>Previdenciário</option><option>Tributário</option><option>Outro</option></select></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Vara / Juízo</label><input class="form-control" id="proc-vara" placeholder="Ex: 1ª Vara Cível"></div>
-    <div class="form-group"><label>Tribunal</label><select class="form-control" id="proc-tribunal"><option>TJPR</option><option>TJSP</option><option>TJRJ</option><option>TJMG</option><option>TJRS</option><option>TJSC</option><option>TRT9</option><option>TRT2</option><option>TRT15</option><option>TRF4</option><option>TRF3</option><option>STJ</option><option>STF</option><option>TST</option><option>Outro</option></select></div>
+  <div class="frow">
+    <div class="fg"><label>Vara / Juízo</label><input class="fc" id="mp-vara" placeholder="Ex: 1ª Vara Cível"></div>
+    <div class="fg"><label>Tribunal</label><select class="fc" id="mp-trib"><option>TJPR</option><option>TJSP</option><option>TJRJ</option><option>TJMG</option><option>TJRS</option><option>TJSC</option><option>TRT9</option><option>TRT2</option><option>TRT15</option><option>TRF4</option><option>TRF3</option><option>TRF1</option><option>STJ</option><option>STF</option><option>TST</option><option>Outro</option></select></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Tipo de Ação</label><input class="form-control" id="proc-tipo" placeholder="Ex: Ação de Cobrança"></div>
-    <div class="form-group"><label>Parte Contrária</label><input class="form-control" id="proc-parte"></div>
+  <div class="frow">
+    <div class="fg"><label>Tipo de Ação</label><input class="fc" id="mp-tipo" placeholder="Ex: Ação de Cobrança"></div>
+    <div class="fg"><label>Parte Contrária</label><input class="fc" id="mp-parte"></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Valor da Causa (R$)</label><input class="form-control" id="proc-valor" type="number"></div>
-    <div class="form-group"><label>Distribuição</label><input class="form-control" id="proc-data" type="date"></div>
+  <div class="frow">
+    <div class="fg"><label>Valor da Causa (R$)</label><input class="fc" id="mp-valor" type="number"></div>
+    <div class="fg"><label>Data Distribuição</label><input class="fc" id="mp-data" type="date"></div>
   </div>
-  <div class="form-group"><label>Observações</label><textarea class="form-control" id="proc-obs"></textarea></div>
-  <div class="modal-actions">
-    <button class="btn btn-outline" onclick="closeModal('modal-processo')">Cancelar</button>
-    <button class="btn btn-gold" onclick="salvarProcesso()">✓ Salvar</button>
-  </div>
-</div></div>
-
-<div class="overlay" id="modal-andamento">
-<div class="modal" style="max-width:680px">
-  <h2>📋 <span id="and-titulo"></span></h2>
-  <div id="and-info" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px"></div>
-  <div style="margin-bottom:14px">
-    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px">Andamentos</div>
-    <div id="and-list" style="max-height:220px;overflow-y:auto"></div>
-  </div>
-  <div class="form-group"><label>+ Novo andamento</label><textarea class="form-control" id="and-texto" placeholder="Descreva o andamento..."></textarea></div>
-  <div class="form-row">
-    <div class="form-group"><label>Data</label><input class="form-control" id="and-data" type="date"></div>
-    <div class="form-group"><label>Tipo</label><select class="form-control" id="and-tipo"><option value="manual">Manual</option></select></div>
-  </div>
-  <div class="modal-actions">
-    <button class="btn btn-outline" onclick="closeModal('modal-andamento')">Fechar</button>
-    <button class="btn btn-gold" onclick="salvarAndamento()">✓ Adicionar</button>
+  <div class="fg"><label>Comarca / Cidade</label><input class="fc" id="mp-comarca" placeholder="Ex: Maringá"></div>
+  <div class="fg"><label>Observações</label><textarea class="fc" id="mp-obs"></textarea></div>
+  <div class="mac">
+    <button class="btn bo" onclick="cm('m-processo')">Cancelar</button>
+    <button class="btn bg" onclick="salvarProcesso()">✓ Salvar Processo</button>
   </div>
 </div></div>
 
-<div class="overlay" id="modal-agenda">
+<div class="overlay" id="m-andamento">
+<div class="modal" style="max-width:660px">
+  <h2>📋 <span id="ma-num"></span></h2>
+  <div id="ma-info" style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px"></div>
+  <div style="margin-bottom:13px">
+    <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:7px">Histórico de Andamentos</div>
+    <div id="ma-list" style="max-height:210px;overflow-y:auto"></div>
+  </div>
+  <div class="fg"><label>+ Novo andamento manual</label><textarea class="fc" id="ma-txt" placeholder="Descreva o andamento..."></textarea></div>
+  <div class="frow">
+    <div class="fg"><label>Data</label><input class="fc" id="ma-data" type="date"></div>
+  </div>
+  <div class="mac">
+    <button class="btn bo" onclick="cm('m-andamento')">Fechar</button>
+    <button class="btn bg" onclick="salvarAndamento()">✓ Adicionar Andamento</button>
+  </div>
+</div></div>
+
+<div class="overlay" id="m-agenda">
 <div class="modal">
-  <h2>📅 <span id="ag-modal-title">Novo Prazo / Evento</span></h2>
-  <input type="hidden" id="ag-id">
-  <div class="form-row">
-    <div class="form-group"><label>Tipo</label><select class="form-control" id="ag-tipo"><option value="prazo">Prazo processual</option><option value="audiencia">Audiência</option><option value="reuniao">Reunião</option><option value="diligencia">Diligência</option><option value="outro">Outro</option></select></div>
-    <div class="form-group"><label>Urgência</label><select class="form-control" id="ag-urgencia"><option value="normal">Normal</option><option value="atencao">Atenção</option><option value="urgente">Urgente</option><option value="fatal">Fatal</option></select></div>
+  <h2>📅 <span id="maga-title">Novo Prazo / Evento</span></h2>
+  <input type="hidden" id="maga-id">
+  <div class="frow">
+    <div class="fg"><label>Tipo</label><select class="fc" id="maga-tipo"><option value="prazo">Prazo processual</option><option value="audiencia">Audiência</option><option value="reuniao">Reunião</option><option value="diligencia">Diligência</option><option value="outro">Outro</option></select></div>
+    <div class="fg"><label>Urgência</label><select class="fc" id="maga-urg"><option value="normal">Normal</option><option value="atencao">Atenção</option><option value="urgente">Urgente</option><option value="fatal">Fatal</option></select></div>
   </div>
-  <div class="form-group"><label>Título *</label><input class="form-control" id="ag-titulo"></div>
-  <div class="form-group"><label>Processo</label><select class="form-control" id="ag-processo"></select></div>
-  <div class="form-row">
-    <div class="form-group"><label>Data *</label><input class="form-control" id="ag-data" type="date"></div>
-    <div class="form-group"><label>Horário</label><input class="form-control" id="ag-hora" type="time"></div>
+  <div class="fg"><label>Título *</label><input class="fc" id="maga-tit"></div>
+  <div class="fg"><label>Processo</label><select class="fc" id="maga-proc"></select></div>
+  <div class="frow">
+    <div class="fg"><label>Data *</label><input class="fc" id="maga-data" type="date"></div>
+    <div class="fg"><label>Horário</label><input class="fc" id="maga-hora" type="time"></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Local</label><input class="form-control" id="ag-local"></div>
-    <div class="form-group"><label>Lembrete</label><select class="form-control" id="ag-lembrete"><option value="1">1 dia antes</option><option value="3" selected>3 dias antes</option><option value="7">1 semana antes</option></select></div>
+  <div class="frow">
+    <div class="fg"><label>Local</label><input class="fc" id="maga-local"></div>
+    <div class="fg"><label>Lembrete</label><select class="fc" id="maga-lem"><option value="1">1 dia antes</option><option value="3" selected>3 dias antes</option><option value="7">1 semana antes</option></select></div>
   </div>
-  <div class="form-group"><label>Observações</label><textarea class="form-control" id="ag-obs"></textarea></div>
-  <div class="modal-actions">
-    <button class="btn btn-outline" onclick="closeModal('modal-agenda')">Cancelar</button>
-    <button class="btn btn-gold" onclick="salvarAgenda()">✓ Salvar</button>
+  <div class="fg"><label>Observações</label><textarea class="fc" id="maga-obs"></textarea></div>
+  <div class="mac">
+    <button class="btn bo" onclick="cm('m-agenda')">Cancelar</button>
+    <button class="btn bg" onclick="salvarAgenda()">✓ Salvar na Agenda</button>
   </div>
 </div></div>
 
-<div class="overlay" id="modal-cliente">
+<div class="overlay" id="m-cliente">
 <div class="modal">
-  <h2>👤 <span id="cli-modal-title">Novo Cliente</span></h2>
-  <input type="hidden" id="cli-id">
-  <div class="form-group"><label>Nome completo / Razão social *</label><input class="form-control" id="cli-nome"></div>
-  <div class="form-row">
-    <div class="form-group"><label>CPF / CNPJ</label><input class="form-control" id="cli-cpf"></div>
-    <div class="form-group"><label>Tipo</label><select class="form-control" id="cli-tipo"><option value="PF">Pessoa Física</option><option value="PJ">Pessoa Jurídica</option></select></div>
+  <h2>👤 <span id="mc-title">Novo Cliente</span></h2>
+  <input type="hidden" id="mc-id">
+  <div class="fg"><label>Nome completo / Razão social *</label><input class="fc" id="mc-nome"></div>
+  <div class="frow">
+    <div class="fg"><label>CPF / CNPJ</label><input class="fc" id="mc-cpf"></div>
+    <div class="fg"><label>Tipo</label><select class="fc" id="mc-tipo"><option value="PF">Pessoa Física</option><option value="PJ">Pessoa Jurídica</option></select></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>E-mail</label><input class="form-control" id="cli-email" type="email"></div>
-    <div class="form-group"><label>Telefone</label><input class="form-control" id="cli-tel"></div>
+  <div class="frow">
+    <div class="fg"><label>E-mail</label><input class="fc" id="mc-email" type="email"></div>
+    <div class="fg"><label>Telefone / WhatsApp</label><input class="fc" id="mc-tel"></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Endereço</label><input class="form-control" id="cli-end"></div>
-    <div class="form-group"><label>Cidade</label><input class="form-control" id="cli-cidade" value="Maringá"></div>
+  <div class="frow">
+    <div class="fg"><label>Endereço</label><input class="fc" id="mc-end"></div>
+    <div class="fg"><label>Cidade</label><input class="fc" id="mc-cid" value="Maringá"></div>
   </div>
-  <div class="form-group"><label>Observações</label><textarea class="form-control" id="cli-obs" rows="2"></textarea></div>
-  <div class="modal-actions">
-    <button class="btn btn-outline" onclick="closeModal('modal-cliente')">Cancelar</button>
-    <button class="btn btn-gold" onclick="salvarCliente()">✓ Salvar</button>
+  <div class="fg"><label>Observações</label><textarea class="fc" id="mc-obs" rows="2"></textarea></div>
+  <div class="mac">
+    <button class="btn bo" onclick="cm('m-cliente')">Cancelar</button>
+    <button class="btn bg" onclick="salvarCliente()">✓ Salvar Cliente</button>
   </div>
 </div></div>
 
-<div class="overlay" id="modal-contrato">
+<div class="overlay" id="m-contrato">
 <div class="modal">
-  <h2>📝 <span id="ct-modal-title">Novo Contrato</span></h2>
-  <input type="hidden" id="ct-id">
-  <div class="form-group"><label>Título *</label><input class="form-control" id="ct-titulo"></div>
-  <div class="form-row">
-    <div class="form-group"><label>Cliente</label><select class="form-control" id="ct-cliente"></select></div>
-    <div class="form-group"><label>Processo</label><select class="form-control" id="ct-processo"></select></div>
+  <h2>📝 <span id="mct-title">Novo Contrato</span></h2>
+  <input type="hidden" id="mct-id">
+  <div class="fg"><label>Título *</label><input class="fc" id="mct-tit"></div>
+  <div class="frow">
+    <div class="fg"><label>Cliente</label><select class="fc" id="mct-cli"></select></div>
+    <div class="fg"><label>Processo</label><select class="fc" id="mct-proc"></select></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Tipo</label><select class="form-control" id="ct-tipo"><option value="honorarios_fixos">Honorários Fixos</option><option value="exito">Êxito</option><option value="misto">Misto</option><option value="retainer">Retainer</option></select></div>
-    <div class="form-group"><label>Status</label><select class="form-control" id="ct-status"><option value="ativo">Ativo</option><option value="suspenso">Suspenso</option><option value="renovar">Renovar</option><option value="encerrado">Encerrado</option></select></div>
+  <div class="frow">
+    <div class="fg"><label>Tipo</label><select class="fc" id="mct-tipo"><option value="honorarios_fixos">Honorários Fixos</option><option value="exito">Êxito</option><option value="misto">Misto</option><option value="retainer">Retainer/Assessoria</option></select></div>
+    <div class="fg"><label>Status</label><select class="fc" id="mct-st"><option value="ativo">Ativo</option><option value="suspenso">Suspenso</option><option value="renovar">Renovar</option><option value="encerrado">Encerrado</option></select></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Valor (R$)</label><input class="form-control" id="ct-valor" type="number"></div>
-    <div class="form-group"><label>% Êxito</label><input class="form-control" id="ct-exito" type="number"></div>
+  <div class="frow">
+    <div class="fg"><label>Valor (R$)</label><input class="fc" id="mct-val" type="number"></div>
+    <div class="fg"><label>% de Êxito</label><input class="fc" id="mct-exit" type="number"></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Início</label><input class="form-control" id="ct-inicio" type="date"></div>
-    <div class="form-group"><label>Fim</label><input class="form-control" id="ct-fim" type="date"></div>
+  <div class="frow">
+    <div class="fg"><label>Início</label><input class="fc" id="mct-ini" type="date"></div>
+    <div class="fg"><label>Fim</label><input class="fc" id="mct-fim" type="date"></div>
   </div>
-  <div class="form-group"><label>Observações</label><textarea class="form-control" id="ct-obs" rows="2"></textarea></div>
-  <div class="modal-actions">
-    <button class="btn btn-outline" onclick="closeModal('modal-contrato')">Cancelar</button>
-    <button class="btn btn-gold" onclick="salvarContrato()">✓ Salvar</button>
+  <div class="fg"><label>Observações</label><textarea class="fc" id="mct-obs" rows="2"></textarea></div>
+  <div class="mac">
+    <button class="btn bo" onclick="cm('m-contrato')">Cancelar</button>
+    <button class="btn bg" onclick="salvarContrato()">✓ Salvar Contrato</button>
   </div>
 </div></div>
 
-<div class="overlay" id="modal-lancamento">
+<div class="overlay" id="m-lanc">
 <div class="modal">
-  <h2>💰 Novo Lançamento</h2>
-  <div class="form-row">
-    <div class="form-group"><label>Tipo *</label><select class="form-control" id="lan-tipo"><option value="receita">Receita</option><option value="despesa">Despesa</option></select></div>
-    <div class="form-group"><label>Categoria</label><select class="form-control" id="lan-cat"><option value="honorarios">Honorários</option><option value="custas">Custas</option><option value="reembolso">Reembolso</option><option value="escritorio">Escritório</option><option value="outro">Outro</option></select></div>
+  <h2>💰 Novo Lançamento Financeiro</h2>
+  <div class="frow">
+    <div class="fg"><label>Tipo *</label><select class="fc" id="ml-tipo"><option value="receita">Receita (entrada)</option><option value="despesa">Despesa (saída)</option></select></div>
+    <div class="fg"><label>Categoria</label><select class="fc" id="ml-cat"><option value="honorarios">Honorários</option><option value="custas">Custas processuais</option><option value="reembolso">Reembolso</option><option value="escritorio">Escritório</option><option value="outro">Outro</option></select></div>
   </div>
-  <div class="form-group"><label>Descrição *</label><input class="form-control" id="lan-desc"></div>
-  <div class="form-row">
-    <div class="form-group"><label>Valor (R$) *</label><input class="form-control" id="lan-valor" type="number"></div>
-    <div class="form-group"><label>Status</label><select class="form-control" id="lan-status"><option value="pendente">Pendente</option><option value="pago">Pago</option></select></div>
+  <div class="fg"><label>Descrição *</label><input class="fc" id="ml-desc"></div>
+  <div class="frow">
+    <div class="fg"><label>Valor (R$) *</label><input class="fc" id="ml-val" type="number"></div>
+    <div class="fg"><label>Status</label><select class="fc" id="ml-st"><option value="pendente">Pendente</option><option value="pago">Pago</option></select></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Data</label><input class="form-control" id="lan-data" type="date"></div>
-    <div class="form-group"><label>Vencimento</label><input class="form-control" id="lan-venc" type="date"></div>
+  <div class="frow">
+    <div class="fg"><label>Data Lançamento</label><input class="fc" id="ml-data" type="date"></div>
+    <div class="fg"><label>Vencimento</label><input class="fc" id="ml-venc" type="date"></div>
   </div>
-  <div class="form-row">
-    <div class="form-group"><label>Cliente</label><select class="form-control" id="lan-cliente"></select></div>
-    <div class="form-group"><label>Processo</label><select class="form-control" id="lan-processo"></select></div>
+  <div class="frow">
+    <div class="fg"><label>Cliente</label><select class="fc" id="ml-cli"></select></div>
+    <div class="fg"><label>Processo</label><select class="fc" id="ml-proc"></select></div>
   </div>
-  <div class="modal-actions">
-    <button class="btn btn-outline" onclick="closeModal('modal-lancamento')">Cancelar</button>
-    <button class="btn btn-gold" onclick="salvarLancamento()">✓ Lançar</button>
+  <div class="mac">
+    <button class="btn bo" onclick="cm('m-lanc')">Cancelar</button>
+    <button class="btn bg" onclick="salvarLanc()">✓ Lançar</button>
   </div>
 </div></div>
 
-<div class="overlay" id="modal-prazo-pub">
+<div class="overlay" id="m-prazo-pub">
 <div class="modal">
   <h2>📅 Registrar Prazo da Publicação</h2>
-  <input type="hidden" id="pp-pub-id">
-  <div class="form-group"><label>Título</label><input class="form-control" id="pp-titulo"></div>
-  <div class="form-group"><label>Processo</label><select class="form-control" id="pp-processo"></select></div>
-  <div class="form-row">
-    <div class="form-group"><label>Data do Prazo</label><input class="form-control" id="pp-data" type="date"></div>
-    <div class="form-group"><label>Urgência</label><select class="form-control" id="pp-urgencia"><option value="normal">Normal</option><option value="atencao">Atenção</option><option value="urgente">Urgente</option><option value="fatal">Fatal</option></select></div>
+  <input type="hidden" id="mpp-pid">
+  <div class="fg"><label>Título</label><input class="fc" id="mpp-tit"></div>
+  <div class="fg"><label>Processo</label><select class="fc" id="mpp-proc"></select></div>
+  <div class="frow">
+    <div class="fg"><label>Data do Prazo</label><input class="fc" id="mpp-data" type="date"></div>
+    <div class="fg"><label>Urgência</label><select class="fc" id="mpp-urg"><option value="normal">Normal</option><option value="atencao">Atenção</option><option value="urgente">Urgente</option><option value="fatal">Fatal</option></select></div>
   </div>
-  <div class="form-group"><label>Obs</label><textarea class="form-control" id="pp-obs" rows="2"></textarea></div>
-  <div class="modal-actions">
-    <button class="btn btn-outline" onclick="closeModal('modal-prazo-pub')">Cancelar</button>
-    <button class="btn btn-gold" onclick="salvarPrazoPub()">✓ Salvar na Agenda</button>
+  <div class="fg"><label>Observações</label><textarea class="fc" id="mpp-obs" rows="2"></textarea></div>
+  <div class="mac">
+    <button class="btn bo" onclick="cm('m-prazo-pub')">Cancelar</button>
+    <button class="btn bg" onclick="salvarPrazoPub()">✓ Salvar na Agenda</button>
   </div>
 </div></div>
 
-<div class="notif" id="notif"><span id="notif-icon">✅</span><span id="notif-txt"></span></div>
+<div class="notif" id="notif"><span id="ni">✅</span><span id="nt"></span></div>
 
 <script>
-// ════════════════════════════════════════════════════════
-// BANCO DE DADOS — IndexedDB
-// ════════════════════════════════════════════════════════
-const DB_NAME = 'AbucarmaJuridico', DB_VER = 2;
-let db;
-
+// ══════════════════════════════════════════════
+// BANCO IndexedDB
+// ══════════════════════════════════════════════
+let DB;
 function abrirDB(){
   return new Promise((res,rej)=>{
-    const req = indexedDB.open(DB_NAME, DB_VER);
-    req.onupgradeneeded = e=>{
-      const d = e.target.result;
-      ['clientes','processos','andamentos','agenda','publicacoes','contratos','financeiro','config']
-        .forEach(store=>{
-          if(!d.objectStoreNames.contains(store)){
-            const s = d.createObjectStore(store,{keyPath:'id',autoIncrement:true});
-            if(store==='processos') s.createIndex('status','status',{unique:false});
-            if(store==='agenda') s.createIndex('data_evento','data_evento',{unique:false});
-            if(store==='publicacoes') s.createIndex('status','status',{unique:false});
-          }
-        });
+    const r=indexedDB.open('AbucarmaV3',1);
+    r.onupgradeneeded=e=>{
+      const d=e.target.result;
+      ['clientes','processos','andamentos','agenda','publicacoes','contratos','financeiro','cfg'].forEach(s=>{
+        if(!d.objectStoreNames.contains(s)) d.createObjectStore(s,{keyPath:'id',autoIncrement:true});
+      });
     };
-    req.onsuccess = e=>{ db=e.target.result; res(db); };
-    req.onerror = e=>rej(e);
+    r.onsuccess=e=>{DB=e.target.result;res(DB);};
+    r.onerror=e=>rej(e);
   });
 }
+const ga=s=>new Promise((res,rej)=>{const t=DB.transaction(s,'readonly');const r=t.objectStore(s).getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>rej(r.error);});
+const gid=(s,id)=>new Promise((res,rej)=>{const t=DB.transaction(s,'readonly');const r=t.objectStore(s).get(id);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});
+const put=(s,o)=>new Promise((res,rej)=>{const t=DB.transaction(s,'readwrite');const r=t.objectStore(s).put(o);r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});
+const del=(s,id)=>new Promise((res,rej)=>{const t=DB.transaction(s,'readwrite');const r=t.objectStore(s).delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error);});
 
-function dbGetAll(store, indexName, indexVal){
-  return new Promise((res,rej)=>{
-    const tx = db.transaction(store,'readonly');
-    const s = tx.objectStore(store);
-    let req;
-    if(indexName && indexVal!==undefined){
-      req = s.index(indexName).getAll(indexVal);
-    } else {
-      req = s.getAll();
-    }
-    req.onsuccess=()=>res(req.result||[]);
-    req.onerror=()=>rej(req.error);
-  });
-}
-
-function dbGet(store,id){
-  return new Promise((res,rej)=>{
-    const tx=db.transaction(store,'readonly');
-    const req=tx.objectStore(store).get(id);
-    req.onsuccess=()=>res(req.result);
-    req.onerror=()=>rej(req.error);
-  });
-}
-
-function dbPut(store,obj){
-  return new Promise((res,rej)=>{
-    const tx=db.transaction(store,'readwrite');
-    const req=tx.objectStore(store).put(obj);
-    req.onsuccess=()=>res(req.result);
-    req.onerror=()=>rej(req.error);
-  });
-}
-
-function dbDelete(store,id){
-  return new Promise((res,rej)=>{
-    const tx=db.transaction(store,'readwrite');
-    const req=tx.objectStore(store).delete(id);
-    req.onsuccess=()=>res();
-    req.onerror=()=>rej(req.error);
-  });
-}
-
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // UTILS
-// ════════════════════════════════════════════════════════
-function fmt(v){ return v!=null?Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}):'—'; }
-function fmtDate(d){ if(!d)return'—'; try{const[y,m,dd]=d.split('-');return`${dd}/${m}/${y}`;}catch{return d;} }
-function today(){ return new Date().toISOString().split('T')[0]; }
-function uid(){ return Date.now()+'_'+Math.random().toString(36).slice(2,7); }
-function escHtml(s){ const d=document.createElement('div');d.textContent=s||'';return d.innerHTML; }
-function diffDays(d){
-  if(!d)return 9999;
-  const now=new Date(); now.setHours(0,0,0,0);
-  const dt=new Date(d+'T00:00:00');
-  return Math.ceil((dt-now)/(1000*86400));
-}
-function addWorkdays(base, dias){
-  let d=new Date(base+'T00:00:00'), c=0;
-  while(c<dias){ d.setDate(d.getDate()+1); if(d.getDay()>0&&d.getDay()<6)c++; }
-  return d.toISOString().split('T')[0];
-}
-function tag(cls,txt){ return `<span class="tag ${cls}">${txt}</span>`; }
-const URGCOR={fatal:'#fde8e8',urgente:'#fde8e8',atencao:'#fdf3dc',normal:'var(--cream)'};
-const URGCLR={fatal:'var(--danger)',urgente:'var(--danger)',atencao:'#8b6914',normal:'var(--navy)'};
-const URGTAG={fatal:['tag-r','Fatal'],urgente:['tag-r','Urgente'],atencao:['tag-gold','Atenção'],normal:['tag-b','Normal']};
-const STATAG={ativo:['tag-g','Ativo'],aguardando:['tag-gold','Aguardando'],suspenso:['tag-gray','Suspenso'],encerrado:['tag-gray','Encerrado']};
-const AREATAG={'Cível':'tag-b','Trabalhista':'tag-gold','Criminal':'tag-r','Família':'tag-b','Previdenciário':'tag-g'};
+// ══════════════════════════════════════════════
+const fmt=v=>v!=null?Number(v).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}):'—';
+const fd=d=>{if(!d)return'—';try{const[y,m,dd]=d.split('-');return`${dd}/${m}/${y}`;}catch{return d;}};
+const td=()=>new Date().toISOString().split('T')[0];
+const esc=s=>{const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;};
+const dd=d=>{if(!d)return 9999;const n=new Date();n.setHours(0,0,0,0);return Math.ceil((new Date(d+'T00:00:00')-n)/86400000);};
+const addwd=(b,n)=>{let d=new Date(b+'T00:00:00'),c=0;while(c<n){d.setDate(d.getDate()+1);if(d.getDay()>0&&d.getDay()<6)c++;}return d.toISOString().split('T')[0];};
+const tg=(c,t)=>`<span class="tag ${c}">${t}</span>`;
+const UC={fatal:'#fde8e8',urgente:'#fde8e8',atencao:'#fdf3dc',normal:'var(--cream)'};
+const UCC={fatal:'var(--danger)',urgente:'var(--danger)',atencao:'#8b6914',normal:'var(--navy)'};
+const UTG={fatal:['tr','Fatal'],urgente:['tr','Urgente'],atencao:['to','Atenção'],normal:['tb','Normal']};
+const STG={ativo:['tg','Ativo'],aguardando:['to','Aguardando'],suspenso:['tgr','Suspenso'],encerrado:['tgr','Encerrado']};
+const ATG={'Cível':'tb','Trabalhista':'to','Criminal':'tr','Família':'tb','Previdenciário':'tg'};
 
 function notif(msg,err=false){
   const el=document.getElementById('notif');
-  document.getElementById('notif-txt').textContent=msg;
-  document.getElementById('notif-icon').textContent=err?'❌':'✅';
-  el.className='notif show'+(err?' error':'');
+  document.getElementById('nt').textContent=msg;
+  document.getElementById('ni').textContent=err?'❌':'✅';
+  el.className='notif show'+(err?' err':'');
   clearTimeout(el._t);
   el._t=setTimeout(()=>el.className='notif',3500);
 }
+const om=id=>document.getElementById(id).classList.add('open');
+const cm=id=>document.getElementById(id).classList.remove('open');
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 
-function openModal(id){ document.getElementById(id).classList.add('open'); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.overlay').forEach(o=>{
-  o.addEventListener('click',e=>{ if(e.target===o)o.classList.remove('open'); });
-});
-
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // NAVEGAÇÃO
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 const TITLES={dashboard:'Dashboard',publicacoes:'Publicações — Diários Oficiais',agenda:'Agenda & Prazos',processos:'Processos',contratos:'Contratos',clientes:'Clientes',financeiro:'Honorários & Financeiro',config:'Configurações'};
-function nav(panel){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('panel-'+panel).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.panel===panel));
-  document.getElementById('page-title').textContent=TITLES[panel]||panel;
-  loadPanel(panel);
-}
-document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>nav(n.dataset.panel)));
-function loadPanel(p){
+function nav(p){
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  document.getElementById('panel-'+p).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.p===p));
+  document.getElementById('ptitle').textContent=TITLES[p]||p;
   if(p==='dashboard')loadDash();
   if(p==='publicacoes')renderPubs();
-  if(p==='agenda'){renderEventos();renderCal();}
-  if(p==='processos')renderProcessos();
+  if(p==='agenda'){renderEvs();renderCal();}
+  if(p==='processos')renderProcs();
   if(p==='contratos')renderContratos();
   if(p==='clientes')renderClientes();
-  if(p==='financeiro')loadFinanceiro();
+  if(p==='financeiro')loadFin();
 }
+document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>nav(n.dataset.p)));
+document.getElementById('btnovo').onclick=()=>{
+  const p=document.querySelector('.panel.active')?.id?.replace('panel-','');
+  if(p==='clientes')openModalCliente();
+  else if(p==='contratos')openModalContrato();
+  else if(p==='financeiro')openModalLancamento();
+  else if(p==='agenda')openModalAgenda();
+  else openModalProcesso();
+};
+document.getElementById('gsearch').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){nav('processos');setTimeout(()=>renderProcs(e.target.value),80);}
+});
 
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // DASHBOARD
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 async function loadDash(){
-  const [processos,agenda,publicacoes,financeiro]=await Promise.all([
-    dbGetAll('processos'),dbGetAll('agenda'),dbGetAll('publicacoes'),dbGetAll('financeiro')
-  ]);
-  const ativos=processos.filter(p=>p.status==='ativo').length;
-  const novas=publicacoes.filter(p=>p.status==='nova').length;
-  const em7=(d)=>{ const n=diffDays(d); return n>=0&&n<=7; };
-  const urgentes=agenda.filter(a=>a.status==='pendente'&&em7(a.data_evento)).length;
-  const mesIni=today().slice(0,7)+'-01';
-  const honMes=financeiro.filter(f=>f.tipo==='receita'&&f.status==='pago'&&f.data_pagamento>=mesIni).reduce((s,f)=>s+Number(f.valor||0),0);
-  const aReceber=financeiro.filter(f=>f.tipo==='receita'&&f.status==='pendente').reduce((s,f)=>s+Number(f.valor||0),0);
-
-  document.getElementById('badge-pub').textContent=novas;
-  document.getElementById('badge-agenda').textContent=urgentes;
-
-  document.getElementById('dash-stats').innerHTML=`
-    <div class="stat-card ${urgentes>0?'c-danger':''}">
-      <div class="stat-label">Prazos (7 dias)</div>
-      <div class="stat-value">${urgentes}</div>
-      <div class="stat-sub">${urgentes>0?'⚠️ Atenção necessária':'✅ Nenhum urgente'}</div>
-      <div class="stat-icon">⏰</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Processos Ativos</div>
-      <div class="stat-value">${ativos}</div>
-      <div class="stat-sub">de ${processos.length} total</div>
-      <div class="stat-icon">📁</div>
-    </div>
-    <div class="stat-card c-success">
-      <div class="stat-label">Publicações Novas</div>
-      <div class="stat-value">${novas}</div>
-      <div class="stat-sub">${novas>0?'Aguardando revisão':'Tudo revisado'}</div>
-      <div class="stat-icon">📰</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Honorários (Mês)</div>
-      <div class="stat-value sm">${fmt(honMes)}</div>
-      <div class="stat-sub">A receber: ${fmt(aReceber)}</div>
-      <div class="stat-icon">💰</div>
-    </div>`;
-
-  const prazos=agenda.filter(a=>a.status==='pendente'&&diffDays(a.data_evento)<=14&&diffDays(a.data_evento)>=0)
-    .sort((a,b)=>a.data_evento.localeCompare(b.data_evento)).slice(0,5);
-
-  document.getElementById('dash-prazos').innerHTML=prazos.length?prazos.map(p=>{
-    const dias=diffDays(p.data_evento);
+  const [procs,ag,pubs,fin]=await Promise.all([ga('processos'),ga('agenda'),ga('publicacoes'),ga('financeiro')]);
+  const ativos=procs.filter(p=>p.status==='ativo').length;
+  const novas=pubs.filter(p=>p.status==='nova').length;
+  const urg=ag.filter(a=>a.status==='pendente'&&dd(a.data_evento)>=0&&dd(a.data_evento)<=7).length;
+  const mi=td().slice(0,7)+'-01';
+  const hm=fin.filter(f=>f.tipo==='receita'&&f.status==='pago'&&(f.data_pagamento||'')>=mi).reduce((s,f)=>s+Number(f.valor||0),0);
+  const ar=fin.filter(f=>f.tipo==='receita'&&f.status==='pendente').reduce((s,f)=>s+Number(f.valor||0),0);
+  document.getElementById('bp').textContent=novas;
+  document.getElementById('ba').textContent=urg;
+  document.getElementById('dstats').innerHTML=`
+    <div class="sc ${urg>0?'cd':''}"><div class="sl">Prazos (7 dias)</div><div class="sv">${urg}</div><div class="ss">${urg>0?'⚠️ Atenção necessária':'✅ Nenhum urgente'}</div><div class="si">⏰</div></div>
+    <div class="sc"><div class="sl">Processos Ativos</div><div class="sv">${ativos}</div><div class="ss">de ${procs.length} cadastrados</div><div class="si">📁</div></div>
+    <div class="sc cs"><div class="sl">Publicações Novas</div><div class="sv">${novas}</div><div class="ss">${novas>0?'Aguardando revisão':'Tudo revisado'}</div><div class="si">📰</div></div>
+    <div class="sc"><div class="sl">Honorários (Mês)</div><div class="sv sm">${fmt(hm)}</div><div class="ss">A receber: ${fmt(ar)}</div><div class="si">💰</div></div>`;
+  const pz=ag.filter(a=>a.status==='pendente'&&dd(a.data_evento)>=0&&dd(a.data_evento)<=14).sort((a,b)=>a.data_evento.localeCompare(b.data_evento)).slice(0,5);
+  document.getElementById('dprazos').innerHTML=pz.length?pz.map(p=>{
+    const dias=dd(p.data_evento);
     const cor=dias<=1?'var(--danger)':dias<=3?'var(--warning)':'var(--success)';
     const pct=Math.max(10,Math.min(100,100-dias/14*100));
-    const lbl=dias===0?'Hoje':dias===1?'Amanhã':`${dias} dias`;
-    return `<div class="list-item" onclick="nav('agenda')">
-      <span style="font-size:17px">${dias<=0?'🔴':dias<=3?'🟡':'🟢'}</span>
+    const lb=dias===0?'Hoje':dias===1?'Amanhã':`${dias} dias`;
+    return`<div class="li" onclick="nav('agenda')">
+      <span style="font-size:16px">${dias<=0?'🔴':dias<=3?'🟡':'🟢'}</span>
       <div style="flex:1;min-width:0">
-        <div class="item-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(p.titulo)}</div>
-        <div class="item-sub mono">${escHtml(p.processo_num||'')}</div>
-        <div class="prazo-bar"><div class="prazo-fill" style="width:${pct}%;background:${cor}"></div></div>
+        <div class="it" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.titulo)}</div>
+        <div class="is mono">${esc(p.proc_num||'')}</div>
+        <div class="pbar"><div class="pfill" style="width:${pct}%;background:${cor}"></div></div>
       </div>
       <div style="text-align:right;flex-shrink:0">
-        <div style="font-size:11px;font-weight:700;color:${cor}">${lbl}</div>
-        <div class="item-sub">${fmtDate(p.data_evento)}</div>
+        <div style="font-size:11px;font-weight:700;color:${cor}">${lb}</div>
+        <div class="is">${fd(p.data_evento)}</div>
       </div>
-    </div>`}).join(''):'<div class="empty"><div class="icon">✅</div><p>Nenhum prazo nos próximos 14 dias</p></div>';
-
-  const pubsRecentes=publicacoes.sort((a,b)=>b.id-a.id).slice(0,4);
-  document.getElementById('dash-pubs').innerHTML=pubsRecentes.length?pubsRecentes.map(p=>{
-    const cls=p.status==='nova'?'tag-gold':'tag-gray';
-    return `<div class="list-item" onclick="nav('publicacoes')">
-      <span class="tag ${cls}" style="flex-shrink:0">${p.status.toUpperCase()}</span>
+    </div>`;}).join(''):'<div class="empty"><div class="ei">✅</div><p>Nenhum prazo nos próximos 14 dias</p></div>';
+  const pr=pubs.sort((a,b)=>b.id-a.id).slice(0,4);
+  document.getElementById('dpubs').innerHTML=pr.length?pr.map(p=>`
+    <div class="li" onclick="nav('publicacoes')">
+      <span class="tag ${p.status==='nova'?'to':'tgr'}" style="flex-shrink:0">${p.status.toUpperCase()}</span>
       <div style="min-width:0">
-        <div class="item-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escHtml(p.tipo||'Publicação')} — ${escHtml(p.numero_processo||'?')}</div>
-        <div class="item-sub">${escHtml(p.tribunal||'')} · ${fmtDate(p.data_publicacao)}</div>
+        <div class="it" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.tipo||'Publicação')} — ${esc(p.numero_processo||'?')}</div>
+        <div class="is">${esc(p.tribunal||'')} · ${fd(p.data_publicacao)}</div>
       </div>
-    </div>`}).join(''):'<div class="empty"><div class="icon">📭</div><p>Nenhuma publicação</p></div>';
+    </div>`):'<div class="empty"><div class="ei">📭</div><p>Nenhuma publicação</p></div>';
 }
 
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // PUBLICAÇÕES
-// ════════════════════════════════════════════════════════
-let pubFiltro='', pubTribunalFiltro='';
-const TRIBUNAIS_LISTA=['STF','STJ','TST','TSE','STM','TRF1','TRF2','TRF3','TRF4','TRF5','TRF6','TJAC','TJAL','TJAP','TJAM','TJBA','TJCE','TJDF','TJES','TJGO','TJMA','TJMT','TJMS','TJMG','TJPA','TJPB','TJPR','TJPE','TJPI','TJRJ','TJRN','TJRS','TJRO','TJRR','TJSC','TJSP','TJSE','TJTO','TRT1','TRT2','TRT3','TRT4','TRT5','TRT6','TRT7','TRT8','TRT9','TRT10','TRT11','TRT12','TRT13','TRT14','TRT15','TRT16','TRT17','TRT18','TRT19','TRT20','TRT21','TRT22','TRT23','TRT24'];
-
-// Popula filtro de tribunal
-document.getElementById('filtro-tribunal').innerHTML=
-  '<option value="">Todos os tribunais</option>'+
-  TRIBUNAIS_LISTA.map(t=>`<option value="${t}">${t}</option>`).join('');
-
+// ══════════════════════════════════════════════
+const TRIBS=['STF','STJ','TST','TSE','STM','TRF1','TRF2','TRF3','TRF4','TRF5','TRF6','TJAC','TJAL','TJAP','TJAM','TJBA','TJCE','TJDF','TJES','TJGO','TJMA','TJMT','TJMS','TJMG','TJPA','TJPB','TJPR','TJPE','TJPI','TJRJ','TJRN','TJRS','TJRO','TJRR','TJSC','TJSP','TJSE','TJTO','TRT1','TRT2','TRT3','TRT4','TRT5','TRT6','TRT7','TRT8','TRT9','TRT10','TRT11','TRT12','TRT13','TRT14','TRT15','TRT16','TRT17','TRT18','TRT19','TRT20','TRT21','TRT22','TRT23','TRT24'];
+document.getElementById('ftrib').innerHTML='<option value="">Todos os tribunais</option>'+TRIBS.map(t=>`<option value="${t}">${t}</option>`).join('');
+let PFIL='';
 async function renderPubs(){
-  let pubs=await dbGetAll('publicacoes');
-  pubs.sort((a,b)=>b.id-a.id);
-  const fTrib=document.getElementById('filtro-tribunal').value;
-  if(pubFiltro) pubs=pubs.filter(p=>p.status===pubFiltro);
-  if(fTrib) pubs=pubs.filter(p=>p.tribunal===fTrib);
-  const el=document.getElementById('pub-list');
-  if(!pubs.length){el.innerHTML='<div class="empty"><div class="icon">📭</div><p>Nenhuma publicação encontrada</p></div>';return;}
-  el.innerHTML=pubs.map(p=>{
-    const tipoTag=p.tipo==='Sentença'?'tag-r':p.tipo==='Intimação'?'tag-b':'tag-gold';
-    const stTag=p.status==='nova'?'tag-gold':p.status==='importada'?'tag-g':'tag-gray';
-    const prazoInfo=p.data_prazo?`<div style="margin:6px 0;font-size:12px;color:var(--danger);font-weight:600">⏰ Prazo: ${fmtDate(p.data_prazo)} (${p.prazo_dias}d úteis)</div>`:'';
-    return `<div class="pub-item ${p.status}">
-      <div class="pub-header">
-        <span class="tag ${stTag}">${p.status.toUpperCase()}</span>
-        <span class="tag ${tipoTag}">${escHtml(p.tipo||'Publicação')}</span>
-        ${p.tribunal?`<span class="tag tag-gray">🏛 ${escHtml(p.tribunal)}</span>`:''}
-        <span style="margin-left:auto;font-size:11.5px;color:var(--text-muted)">${fmtDate(p.data_publicacao)}</span>
+  let ps=await ga('publicacoes');
+  ps.sort((a,b)=>b.id-a.id);
+  const ft=document.getElementById('ftrib').value;
+  if(PFIL)ps=ps.filter(p=>p.status===PFIL);
+  if(ft)ps=ps.filter(p=>p.tribunal===ft);
+  const el=document.getElementById('publist');
+  if(!ps.length){el.innerHTML='<div class="empty"><div class="ei">📭</div><p>Nenhuma publicação. Faça upload de um PDF do tribunal.</p></div>';return;}
+  el.innerHTML=ps.map(p=>{
+    const tt=p.tipo==='Sentença'?'tr':p.tipo==='Intimação'?'tb':'to';
+    const st=p.status==='nova'?'to':p.status==='importada'?'tg':'tgr';
+    const pr=p.data_prazo?`<div style="margin:5px 0;font-size:11.5px;color:var(--danger);font-weight:600">⏰ Prazo: ${fd(p.data_prazo)} (${p.prazo_dias}d úteis)</div>`:'';
+    return`<div class="pi ${p.status}">
+      <div class="ph">
+        ${tg(st,p.status.toUpperCase())}
+        ${tg(tt,p.tipo||'Publicação')}
+        ${p.tribunal?tg('tgr','🏛 '+esc(p.tribunal)):''}
+        <span style="margin-left:auto;font-size:11px;color:var(--text-muted)">${fd(p.data_publicacao)}</span>
       </div>
-      <div class="item-title mono" style="margin-bottom:6px;font-size:13px">${escHtml(p.numero_processo||'Processo não identificado')}</div>
-      <div class="pub-body">${escHtml((p.conteudo||'').substring(0,450))}${(p.conteudo||'').length>450?'...':''}</div>
-      ${prazoInfo}
-      <div class="pub-actions">
-        ${p.status!=='importada'?`<button class="btn btn-gold btn-sm" onclick="importarPub(${p.id})">📥 Importar para andamento</button>`:'<span class="tag tag-g">✓ Importada</span>'}
-        ${p.status==='nova'?`<button class="btn btn-outline btn-sm" onclick="abrirPrazoPub(${p.id})">📅 Registrar prazo</button>`:''}
-        ${p.status==='nova'?`<button class="btn btn-outline btn-sm" onclick="marcarLida(${p.id})">✓ Marcar lida</button>`:''}
+      <div class="it mono" style="margin-bottom:5px">${esc(p.numero_processo||'Processo não identificado')}</div>
+      <div class="pb">${esc((p.conteudo||'').substring(0,400))}${(p.conteudo||'').length>400?'...':''}</div>
+      ${pr}
+      <div class="pa">
+        ${p.status!=='importada'?`<button class="btn bg bsm" onclick="impPub(${p.id})">📥 Importar para andamento</button>`:'<span class="tag tg">✓ Importada</span>'}
+        ${p.status==='nova'?`<button class="btn bo bsm" onclick="abrirPrazoPub(${p.id})">📅 Registrar prazo</button>`:''}
+        ${p.status==='nova'?`<button class="btn bo bsm" onclick="markLida(${p.id})">✓ Marcar lida</button>`:''}
       </div>
-    </div>`;
-  }).join('');
+    </div>`;}).join('');
 }
-
-function filterPubs(s,btn){
-  pubFiltro=s;
-  document.querySelectorAll('#panel-publicacoes .filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderPubs();
+function fpubs(s,b){PFIL=s;document.querySelectorAll('#panel-publicacoes .fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderPubs();}
+async function impPub(id){
+  const p=await gid('publicacoes',id);if(!p)return;
+  if(p.processo_id)await put('andamentos',{processo_id:p.processo_id,tipo:'doj',descricao:`[${p.tribunal||'DOJ'}] ${p.conteudo||''}`.substring(0,1000),data_andamento:p.data_publicacao,criado_em:new Date().toISOString()});
+  p.status='importada';await put('publicacoes',p);
+  notif('Importado para o andamento!');renderPubs();loadDash();
 }
-
-async function importarPub(id){
-  const pub=await dbGet('publicacoes',id);
-  if(!pub)return;
-  if(pub.processo_id){
-    await dbPut('andamentos',{processo_id:pub.processo_id,tipo:'doj',descricao:`[${pub.tribunal||'DOJ'}] ${pub.conteudo||''}`.substring(0,1000),data_andamento:pub.data_publicacao,criado_em:new Date().toISOString()});
-  }
-  pub.status='importada';
-  await dbPut('publicacoes',pub);
-  notif('Publicação importada para o andamento!');
-  renderPubs(); loadDash();
-}
-
-async function marcarLida(id){
-  const pub=await dbGet('publicacoes',id);
-  if(!pub)return;
-  pub.status='lida';
-  await dbPut('publicacoes',pub);
-  notif('Marcada como lida');
-  renderPubs(); loadDash();
-}
-
+async function markLida(id){const p=await gid('publicacoes',id);if(!p)return;p.status='lida';await put('publicacoes',p);notif('Marcada como lida');renderPubs();loadDash();}
 async function abrirPrazoPub(id){
-  const pub=await dbGet('publicacoes',id);
-  if(!pub)return;
-  document.getElementById('pp-pub-id').value=id;
-  document.getElementById('pp-titulo').value=`${pub.tipo||'Publicação'} — ${pub.numero_processo||'Processo'} [${pub.tribunal||''}]`;
-  document.getElementById('pp-data').value=pub.data_prazo||addWorkdays(today(),pub.prazo_dias||15);
-  document.getElementById('pp-urgencia').value=pub.prazo_dias<=5?'urgente':'atencao';
-  document.getElementById('pp-obs').value=`Importado de ${pub.tribunal||'DOJ'} em ${fmtDate(pub.data_publicacao)}`;
-  await preencherSelectProcessos('pp-processo',pub.processo_id);
-  openModal('modal-prazo-pub');
+  const p=await gid('publicacoes',id);if(!p)return;
+  document.getElementById('mpp-pid').value=id;
+  document.getElementById('mpp-tit').value=`${p.tipo||'Pub'} — ${p.numero_processo||'Processo'} [${p.tribunal||''}]`;
+  document.getElementById('mpp-data').value=p.data_prazo||addwd(td(),p.prazo_dias||15);
+  document.getElementById('mpp-urg').value=p.prazo_dias<=5?'urgente':'atencao';
+  document.getElementById('mpp-obs').value=`${p.tribunal||'DOJ'} — ${fd(p.data_publicacao)}`;
+  await fillProcs('mpp-proc',p.processo_id);om('m-prazo-pub');
 }
-
 async function salvarPrazoPub(){
-  const pubId=parseInt(document.getElementById('pp-pub-id').value);
-  const dados={titulo:document.getElementById('pp-titulo').value,tipo:'prazo',processo_id:parseInt(document.getElementById('pp-processo').value)||null,publicacao_id:pubId,data_evento:document.getElementById('pp-data').value,urgencia:document.getElementById('pp-urgencia').value,descricao:document.getElementById('pp-obs').value,status:'pendente',lembrete_dias:3,criado_em:new Date().toISOString()};
-  if(!dados.titulo||!dados.data_evento){notif('Preencha título e data',true);return;}
-  await dbPut('agenda',dados);
-  notif('Prazo registrado na agenda!');
-  closeModal('modal-prazo-pub'); loadDash();
+  const pid=parseInt(document.getElementById('mpp-pid').value);
+  const proc_id=parseInt(document.getElementById('mpp-proc').value)||null;
+  let pn='';if(proc_id){const p=await gid('processos',proc_id);pn=p?.numero||'';}
+  const d={titulo:document.getElementById('mpp-tit').value,tipo:'prazo',processo_id:proc_id,proc_num:pn,publicacao_id:pid,data_evento:document.getElementById('mpp-data').value,urgencia:document.getElementById('mpp-urg').value,descricao:document.getElementById('mpp-obs').value,status:'pendente',lembrete_dias:3,criado_em:new Date().toISOString()};
+  if(!d.titulo||!d.data_evento){notif('Preencha título e data',true);return;}
+  await put('agenda',d);notif('Prazo salvo na agenda!');cm('m-prazo-pub');loadDash();
 }
-
-// DOJ — processar PDF
-const TERMOS_BUSCA=['VINICIUS ABUCARMA','119.441','OAB/PR 119.441','OAB PR 119441','119441'];
-const REGEX_PROC=/\d{7}-\d{2}\.\d{4}\.\d{1,2}\.\d{2}\.\d{4}/g;
-const TIPOS_PUB={intimação:'Intimação','intime-se':'Intimação',citação:'Citação','cite-se':'Citação',despacho:'Despacho',sentença:'Sentença',acórdão:'Acórdão',decisão:'Decisão',edital:'Edital'};
-
-function identificarTipo(t){
-  const tl=t.toLowerCase();
-  for(const[k,v] of Object.entries(TIPOS_PUB)) if(tl.includes(k)) return v;
-  return 'Outros';
-}
-function extrairPrazo(t){
-  const m=t.match(/(\d+)\s*\([^)]+\)\s*dias?\s*úteis/i)||t.match(/(\d+)\s*dias?\s*úteis/i);
-  return m?parseInt(m[1]):null;
-}
-
-async function processarPDF(input){
-  if(!input.files[0])return;
-  const file=input.files[0];
-  input.value='';
-  // Mostra modal para selecionar tribunal
-  const trib=prompt(`PDF: ${file.name}\n\nDigite a sigla do tribunal (ex: TJPR, TJSP, TRT9, STJ):`)?.trim().toUpperCase();
-  if(!trib){return;}
-  notif(`Processando PDF — ${trib}...`);
-  // Lê como texto via FileReader
+// PDF
+const TERMOS=['VINICIUS ABUCARMA','119.441','OAB/PR 119.441','OAB PR 119441','119441'];
+const RPROC=/\d{7}-\d{2}\.\d{4}\.\d{1,2}\.\d{2}\.\d{4}/g;
+const TIPOS={intimação:'Intimação','intime-se':'Intimação',citação:'Citação','cite-se':'Citação',despacho:'Despacho',sentença:'Sentença',acórdão:'Acórdão',decisão:'Decisão',edital:'Edital'};
+function idTipo(t){const l=t.toLowerCase();for(const[k,v] of Object.entries(TIPOS))if(l.includes(k))return v;return'Outros';}
+function idPrazo(t){const m=t.match(/(\d+)\s*\([^)]+\)\s*dias?\s*úteis/i)||t.match(/(\d+)\s*dias?\s*úteis/i);return m?parseInt(m[1]):null;}
+async function processPDF(inp){
+  if(!inp.files[0])return;
+  const f=inp.files[0];inp.value='';
+  const trib=(prompt(`Arquivo: ${f.name}\n\nDigite a sigla do tribunal:\n(ex: TJPR, TJSP, TJRJ, TRT9, TRT2, TRF4, STJ, STF)`)||'').trim().toUpperCase();
+  if(!trib){notif('Tribunal não informado',true);return;}
+  notif(`Processando PDF do ${trib}...`);
   const reader=new FileReader();
   reader.onload=async function(e){
-    // Tenta extrair texto via PDF.js (CDN)
     let texto='';
     try{
-      const arr=new Uint8Array(e.target.result);
-      // Usa biblioteca pdfjs-dist via CDN
-      const pdfjsLib=window['pdfjs-dist/build/pdf'];
-      if(pdfjsLib){
-        const pdf=await pdfjsLib.getDocument({data:arr}).promise;
+      if(window.pdfjsLib){
+        const pdf=await pdfjsLib.getDocument({data:new Uint8Array(e.target.result)}).promise;
         for(let i=1;i<=pdf.numPages;i++){
-          const page=await pdf.getPage(i);
-          const content=await page.getTextContent();
-          texto+=content.items.map(it=>it.str).join(' ')+'\n';
+          const pg=await pdf.getPage(i);
+          const ct=await pg.getTextContent();
+          texto+=ct.items.map(it=>it.str).join(' ')+'\n';
         }
       }
-    }catch(err){
-      // Fallback: tenta ler como text
-      texto=new TextDecoder('utf-8',{fatal:false}).decode(new Uint8Array(e.target.result));
-    }
-    if(!texto||texto.length<100){
-      notif('Não foi possível extrair texto do PDF. Tente copiar e colar o texto manualmente.',true);
-      return;
-    }
-    await filtrarEInserirPublicacoes(texto,trib,today());
+    }catch(err){}
+    if(!texto||texto.length<50) texto=new TextDecoder('utf-8',{fatal:false}).decode(new Uint8Array(e.target.result));
+    await parsePDF(texto,trib);
   };
-  reader.readAsArrayBuffer(file);
+  reader.readAsArrayBuffer(f);
 }
-
-async function filtrarEInserirPublicacoes(texto,tribunal,dataPub){
-  const textoNorm=texto.replace(/\s+/g,' ');
-  const blocos=textoNorm.split(/(?=\d{7}-\d{2}\.\d{4})|(?=PROCESSO\s+N[Oº])|(?=AUTOS\s+N[Oº])/i);
-  let novas=0;
-  const vistos=new Set();
+async function parsePDF(texto,tribunal){
+  const tn=texto.replace(/\s+/g,' ');
+  const blocos=tn.split(/(?=\d{7}-\d{2}\.\d{4})|(?=PROCESSO\s+N[Oº°])|(?=AUTOS\s+N[Oº°])/i);
+  let novas=0;const vis=new Set();
+  const procs=await ga('processos');
   for(const bloco of blocos){
-    if(bloco.trim().length<40)continue;
-    const upper=bloco.toUpperCase();
-    if(!TERMOS_BUSCA.some(t=>upper.includes(t.toUpperCase())))continue;
-    const h=bloco.slice(0,200);
-    if(vistos.has(h))continue;
-    vistos.add(h);
-    const processos=[...bloco.matchAll(REGEX_PROC)].map(m=>m[0]);
-    const tipo=identificarTipo(bloco);
-    const prazo=extrairPrazo(bloco);
-    const dataPrazo=prazo?addWorkdays(dataPub,prazo):null;
-    // Busca processo no banco
-    const procs=await dbGetAll('processos');
-    const proc=processos.length?procs.find(p=>p.numero===processos[0]):null;
-    const pub={numero_processo:processos[0]||null,processo_id:proc?.id||null,tribunal,data_publicacao:dataPub,tipo,conteudo:bloco.trim().substring(0,2000),status:'nova',prazo_dias:prazo,data_prazo:dataPrazo,criado_em:new Date().toISOString()};
-    await dbPut('publicacoes',pub);
+    if(bloco.trim().length<30)continue;
+    const up=bloco.toUpperCase();
+    if(!TERMOS.some(t=>up.includes(t)))continue;
+    const h=bloco.slice(0,150);
+    if(vis.has(h))continue;vis.add(h);
+    const matches=[...bloco.matchAll(RPROC)].map(m=>m[0]);
+    const tipo=idTipo(bloco);
+    const prazo=idPrazo(bloco);
+    const dp=prazo?addwd(td(),prazo):null;
+    const proc=matches.length?procs.find(p=>p.numero===matches[0]):null;
+    await put('publicacoes',{numero_processo:matches[0]||null,processo_id:proc?.id||null,tribunal,data_publicacao:td(),tipo,conteudo:bloco.trim().substring(0,2000),status:'nova',prazo_dias:prazo,data_prazo:dp,criado_em:new Date().toISOString()});
     novas++;
   }
-  if(novas>0){notif(`${novas} publicação(ões) de ${tribunal} importada(s)!`);}
-  else{notif(`Nenhuma publicação de ${tribunal} encontrada no PDF.`);}
-  renderPubs(); loadDash();
+  notif(novas>0?`${novas} publicação(ões) de ${tribunal} importada(s)!`:`Nenhuma publicação de ${tribunal} encontrada.`);
+  renderPubs();loadDash();
 }
+function syncDOJ(){notif('Baixe o PDF do tribunal em seu site oficial e use o botão "Upload PDF"');}
 
-async function syncDOJ(){
-  notif('Para sincronizar: baixe o PDF do tribunal desejado e use o botão "Upload PDF"');
-}
-
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // AGENDA
-// ════════════════════════════════════════════════════════
-let agFiltro='', calY=new Date().getFullYear(), calM=new Date().getMonth();
-
-async function renderEventos(){
-  let evs=await dbGetAll('agenda');
+// ══════════════════════════════════════════════
+let AGFIL='',CY=new Date().getFullYear(),CM=new Date().getMonth();
+async function renderEvs(){
+  let evs=await ga('agenda');
   evs=evs.filter(e=>e.status==='pendente').sort((a,b)=>a.data_evento.localeCompare(b.data_evento));
-  if(agFiltro) evs=evs.filter(e=>e.tipo===agFiltro);
-  const el=document.getElementById('ev-list');
-  if(!evs.length){el.innerHTML='<div class="empty"><div class="icon">📭</div><p>Nenhum compromisso</p></div>';return;}
-  const mn=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  el.innerHTML=evs.slice(0,20).map(e=>{
-    const [y,m,d]=e.data_evento.split('-');
-    const [tCls,tLabel]=URGTAG[e.urgencia]||['tag-b','Normal'];
-    return `<div class="ev-card">
-      <div class="ev-time" style="background:${URGCOR[e.urgencia]||'var(--cream)'}">
-        <div class="day" style="color:${URGCLR[e.urgencia]||'var(--navy)'}">${d}</div>
-        <div class="mon">${mn[parseInt(m)-1]}</div>
+  if(AGFIL)evs=evs.filter(e=>e.tipo===AGFIL);
+  const MN=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  const el=document.getElementById('evlist');
+  if(!evs.length){el.innerHTML='<div class="empty"><div class="ei">📭</div><p>Nenhum compromisso pendente</p></div>';return;}
+  el.innerHTML=evs.slice(0,25).map(e=>{
+    const[y,m,d]=e.data_evento.split('-');
+    const[tc,tl]=UTG[e.urgencia]||['tb','Normal'];
+    return`<div class="evc">
+      <div class="et" style="background:${UC[e.urgencia]||'var(--cream)'}">
+        <div class="day" style="color:${UCC[e.urgencia]||'var(--navy)'}">${d}</div>
+        <div class="mon">${MN[parseInt(m)-1]}</div>
       </div>
-      <div class="ev-body">
-        <div class="ev-title">${escHtml(e.titulo)}</div>
-        <div class="ev-meta">
-          ${tag(tCls,tLabel)}
+      <div class="eb">
+        <div class="etit">${esc(e.titulo)}</div>
+        <div class="emeta">
+          ${tg(tc,tl)}
           ${e.hora_evento?`<span>🕐 ${e.hora_evento}</span>`:''}
-          ${e.local_evento?`<span>📍 ${escHtml(e.local_evento)}</span>`:''}
-          ${e.processo_num?`<span class="mono">${escHtml(e.processo_num)}</span>`:''}
+          ${e.local_evento?`<span>📍 ${esc(e.local_evento)}</span>`:''}
+          ${e.proc_num?`<span class="mono">${esc(e.proc_num)}</span>`:''}
         </div>
-        ${e.publicacao_id?'<div style="font-size:11px;color:var(--text-muted);margin-top:5px">📰 Importado do DOJ</div>':''}
+        ${e.publicacao_id?'<div style="font-size:10.5px;color:var(--text-muted);margin-top:4px">📰 Importado do DOJ</div>':''}
       </div>
-      <div style="display:flex;gap:5px">
-        <button class="btn btn-sm btn-success" onclick="concluirEvento(${e.id})" title="Concluir">✓</button>
-        <button class="btn btn-sm btn-ghost" onclick="editarEvento(${e.id})" title="Editar">✏️</button>
+      <div style="display:flex;gap:4px">
+        <button class="btn bs bsm" onclick="concluirEv(${e.id})" title="Concluir">✓</button>
+        <button class="btn bo bsm" onclick="editarEv(${e.id})" title="Editar">✏️</button>
       </div>
-    </div>`;
-  }).join('');
+    </div>`;}).join('');
 }
-
-function filterAg(t,btn){
-  agFiltro=t;
-  document.querySelectorAll('#panel-agenda .filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderEventos();
-}
-
-function renderCal(){
-  const mn=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-  document.getElementById('cal-title').textContent=`${mn[calM]} ${calY}`;
-  dbGetAll('agenda').then(evs=>{
-    const evDates={};
-    evs.filter(e=>e.status==='pendente').forEach(e=>{
-      const[ey,em,ed]=e.data_evento.split('-');
-      if(parseInt(ey)===calY&&parseInt(em)-1===calM){
-        const d=parseInt(ed);
-        if(!evDates[d])evDates[d]='normal';
-        if(['urgente','fatal'].includes(e.urgencia))evDates[d]='urg';
-      }
-    });
-    const today=new Date();
-    const first=new Date(calY,calM,1).getDay();
-    const last=new Date(calY,calM+1,0).getDate();
-    const prev=new Date(calY,calM,0).getDate();
-    let html=['D','S','T','Q','Q','S','S'].map(d=>`<div class="cal-dn">${d}</div>`).join('');
-    for(let i=0;i<first;i++) html+=`<div class="cal-d other">${prev-first+i+1}</div>`;
-    for(let d=1;d<=last;d++){
-      const isTd=d===today.getDate()&&calM===today.getMonth()&&calY===today.getFullYear();
-      const ev=evDates[d];
-      html+=`<div class="cal-d${isTd?' today':''}${ev?' has-ev':''}${ev==='urg'?' has-urg':''}">${d}</div>`;
+function fag(t,b){AGFIL=t;document.querySelectorAll('#panel-agenda .fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderEvs();}
+async function renderCal(){
+  const MN=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  document.getElementById('caltit').textContent=`${MN[CM]} ${CY}`;
+  const evs=await ga('agenda');
+  const ed={};
+  evs.filter(e=>e.status==='pendente').forEach(e=>{
+    const[ey,em,eday]=e.data_evento.split('-');
+    if(parseInt(ey)===CY&&parseInt(em)-1===CM){
+      const d=parseInt(eday);if(!ed[d])ed[d]='n';
+      if(['urgente','fatal'].includes(e.urgencia))ed[d]='u';
     }
-    const rem=(7-(first+last)%7)%7;
-    for(let i=1;i<=rem;i++) html+=`<div class="cal-d other">${i}</div>`;
-    document.getElementById('cal-grid').innerHTML=html;
   });
+  const now=new Date();
+  const first=new Date(CY,CM,1).getDay();
+  const last=new Date(CY,CM+1,0).getDate();
+  const prev=new Date(CY,CM,0).getDate();
+  let h=['D','S','T','Q','Q','S','S'].map(d=>`<div class="cdn">${d}</div>`).join('');
+  for(let i=0;i<first;i++)h+=`<div class="cd2 other">${prev-first+i+1}</div>`;
+  for(let d=1;d<=last;d++){
+    const it=d===now.getDate()&&CM===now.getMonth()&&CY===now.getFullYear();
+    const ev=ed[d];
+    h+=`<div class="cd2${it?' today':''}${ev?' hev':''}${ev==='u'?' hurg':''}">${d}</div>`;
+  }
+  const rm=(7-(first+last)%7)%7;
+  for(let i=1;i<=rm;i++)h+=`<div class="cd2 other">${i}</div>`;
+  document.getElementById('calgrid').innerHTML=h;
 }
-
-function calNav(dir){ calM+=dir; if(calM>11){calM=0;calY++;} if(calM<0){calM=11;calY--;} renderCal(); }
-
-function abrirModalAgenda(){
-  document.getElementById('ag-id').value='';
-  document.getElementById('ag-modal-title').textContent='Novo Prazo / Evento';
-  document.getElementById('ag-titulo').value='';
-  document.getElementById('ag-data').value=today();
-  document.getElementById('ag-hora').value='';
-  document.getElementById('ag-local').value='';
-  document.getElementById('ag-obs').value='';
-  document.getElementById('ag-tipo').value='prazo';
-  document.getElementById('ag-urgencia').value='normal';
-  preencherSelectProcessos('ag-processo');
-  openModal('modal-agenda');
+function calNav(dir){CM+=dir;if(CM>11){CM=0;CY++;}if(CM<0){CM=11;CY--;}renderCal();}
+function openModalAgenda(){
+  document.getElementById('maga-id').value='';
+  document.getElementById('maga-title').textContent='Novo Prazo / Evento';
+  document.getElementById('maga-tit').value='';
+  document.getElementById('maga-data').value=td();
+  document.getElementById('maga-hora').value='';
+  document.getElementById('maga-local').value='';
+  document.getElementById('maga-obs').value='';
+  document.getElementById('maga-tipo').value='prazo';
+  document.getElementById('maga-urg').value='normal';
+  fillProcs('maga-proc');om('m-agenda');
 }
-
-async function editarEvento(id){
-  const e=await dbGet('agenda',id);
-  if(!e)return;
-  document.getElementById('ag-id').value=id;
-  document.getElementById('ag-modal-title').textContent='Editar Evento';
-  document.getElementById('ag-titulo').value=e.titulo||'';
-  document.getElementById('ag-tipo').value=e.tipo||'prazo';
-  document.getElementById('ag-urgencia').value=e.urgencia||'normal';
-  document.getElementById('ag-data').value=e.data_evento||'';
-  document.getElementById('ag-hora').value=e.hora_evento||'';
-  document.getElementById('ag-local').value=e.local_evento||'';
-  document.getElementById('ag-obs').value=e.descricao||'';
-  await preencherSelectProcessos('ag-processo',e.processo_id);
-  openModal('modal-agenda');
+async function editarEv(id){
+  const e=await gid('agenda',id);if(!e)return;
+  document.getElementById('maga-id').value=id;
+  document.getElementById('maga-title').textContent='Editar Evento';
+  document.getElementById('maga-tit').value=e.titulo||'';
+  document.getElementById('maga-tipo').value=e.tipo||'prazo';
+  document.getElementById('maga-urg').value=e.urgencia||'normal';
+  document.getElementById('maga-data').value=e.data_evento||'';
+  document.getElementById('maga-hora').value=e.hora_evento||'';
+  document.getElementById('maga-local').value=e.local_evento||'';
+  document.getElementById('maga-obs').value=e.descricao||'';
+  await fillProcs('maga-proc',e.processo_id);om('m-agenda');
 }
-
 async function salvarAgenda(){
-  const id=document.getElementById('ag-id').value;
-  const procId=parseInt(document.getElementById('ag-processo').value)||null;
-  let procNum='';
-  if(procId){const p=await dbGet('processos',procId);procNum=p?.numero||'';}
-  const dados={titulo:document.getElementById('ag-titulo').value,tipo:document.getElementById('ag-tipo').value,urgencia:document.getElementById('ag-urgencia').value,processo_id:procId,processo_num:procNum,data_evento:document.getElementById('ag-data').value,hora_evento:document.getElementById('ag-hora').value||null,local_evento:document.getElementById('ag-local').value||null,descricao:document.getElementById('ag-obs').value||null,status:'pendente',lembrete_dias:parseInt(document.getElementById('ag-lembrete').value),criado_em:new Date().toISOString()};
-  if(!dados.titulo||!dados.data_evento){notif('Preencha título e data',true);return;}
-  if(id) dados.id=parseInt(id);
-  await dbPut('agenda',dados);
-  notif('Evento salvo na agenda!');
-  closeModal('modal-agenda'); renderEventos(); renderCal(); loadDash();
+  const id=document.getElementById('maga-id').value;
+  const pid=parseInt(document.getElementById('maga-proc').value)||null;
+  let pn='';if(pid){const p=await gid('processos',pid);pn=p?.numero||'';}
+  const d={titulo:document.getElementById('maga-tit').value,tipo:document.getElementById('maga-tipo').value,urgencia:document.getElementById('maga-urg').value,processo_id:pid,proc_num:pn,data_evento:document.getElementById('maga-data').value,hora_evento:document.getElementById('maga-hora').value||null,local_evento:document.getElementById('maga-local').value||null,descricao:document.getElementById('maga-obs').value||null,status:'pendente',lembrete_dias:parseInt(document.getElementById('maga-lem').value),criado_em:new Date().toISOString()};
+  if(!d.titulo||!d.data_evento){notif('Preencha título e data',true);return;}
+  if(id)d.id=parseInt(id);
+  await put('agenda',d);notif('Evento salvo!');cm('m-agenda');renderEvs();renderCal();loadDash();
 }
+async function concluirEv(id){const e=await gid('agenda',id);if(!e)return;e.status='concluido';await put('agenda',e);notif('Concluído!');renderEvs();renderCal();loadDash();}
 
-async function concluirEvento(id){
-  const e=await dbGet('agenda',id);
-  if(!e)return;
-  e.status='concluido';
-  await dbPut('agenda',e);
-  notif('Marcado como concluído!');
-  renderEventos(); renderCal(); loadDash();
-}
-
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // PROCESSOS
-// ════════════════════════════════════════════════════════
-let procFiltroStatus='',procFiltroArea='';
+// ══════════════════════════════════════════════
+let PFS='',PFA='';
+async function renderProcs(busca=''){
+  let ps=await ga('processos');
+  const cs=await ga('clientes');
+  const cm=Object.fromEntries(cs.map(c=>[c.id,c]));
+  if(PFS)ps=ps.filter(p=>p.status===PFS);
+  if(PFA)ps=ps.filter(p=>p.area===PFA);
+  if(busca)ps=ps.filter(p=>(p.numero||'').includes(busca)||(cm[p.cliente_id]?.nome||'').toLowerCase().includes(busca.toLowerCase())||(p.tipo_acao||'').toLowerCase().includes(busca.toLowerCase()));
+  const el=document.getElementById('proclist');
+  if(!ps.length){el.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="ei">📁</div><p>Nenhum processo cadastrado</p></div>';return;}
+  el.innerHTML=ps.map(p=>{
+    const c=cm[p.cliente_id];
+    const[sc,sl]=STG[p.status]||['tgr',p.status||'—'];
+    const ac=ATG[p.area]||'tgr';
+    return`<div class="tr2" onclick="abrirProc(${p.id})">
+      <div><div class="mono">${esc(p.numero||'—')}</div></div>
+      <div><div class="it" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c?.nome||'—')}</div><div class="is">${esc(p.tipo_acao||'')}</div></div>
+      <div><div class="is">${esc(p.vara||'')} · ${esc(p.tribunal||'')}</div></div>
+      <div>${tg(ac,p.area||'—')}</div>
+      <div>${tg(sc,sl)}</div>
+      <div><button class="btn bo bsm" onclick="event.stopPropagation();abrirProc(${p.id})">Abrir</button></div>
+    </div>`;}).join('');
+}
+function fproc(v,b,t){
+  if(t==='s')PFS=PFS===v?'':v;else PFA=PFA===v?'':v;
+  document.querySelectorAll('#panel-processos .fb').forEach(x=>x.classList.remove('active'));
+  if((t==='s'&&PFS)||(t==='a'&&PFA))b.classList.add('active');
+  renderProcs();
+}
+function openModalProcesso(){
+  document.getElementById('mp-id').value='';
+  document.getElementById('mp-title').textContent='Novo Processo';
+  ['mp-num','mp-vara','mp-tipo','mp-parte','mp-obs','mp-comarca'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mp-valor').value='';
+  document.getElementById('mp-data').value=td();
+  document.getElementById('mp-area').value='Cível';
+  fillClis('mp-cli');om('m-processo');
+}
+async function abrirProc(id){
+  const p=await gid('processos',id);if(!p)return;
+  const c=p.cliente_id?await gid('clientes',p.cliente_id):null;
+  const ands=(await ga('andamentos')).filter(a=>a.processo_id===id).sort((a,b)=>(b.criado_em||'').localeCompare(a.criado_em||''));
+  document.getElementById('ma-num').textContent=p.numero||'Processo';
+  document.getElementById('ma-info').innerHTML=`
+    <div class="ib"><div class="ilabel">Cliente</div><div class="ival">${esc(c?.nome||'—')}</div></div>
+    <div class="ib"><div class="ilabel">Vara / Tribunal</div><div class="ival">${esc(p.vara||'—')} · ${esc(p.tribunal||'')}</div></div>
+    <div class="ib"><div class="ilabel">Tipo de Ação</div><div class="ival">${esc(p.tipo_acao||'—')}</div></div>
+    <div class="ib"><div class="ilabel">Valor da Causa</div><div class="ival">${fmt(p.valor_causa)}</div></div>
+    <div class="ib"><div class="ilabel">Parte Contrária</div><div class="ival">${esc(p.parte_contraria||'—')}</div></div>
+    <div class="ib"><div class="ilabel">Status</div><div class="ival">${p.status||'—'}</div></div>`;
+  document.getElementById('ma-list').innerHTML=ands.length?ands.map(a=>`
+    <div class="andi ${a.tipo}">
+      <div class="andh"><span class="tag ${a.tipo==='doj'?'to':'tgr'}">${a.tipo==='doj'?'DOJ':'Manual'}</span><span style="font-size:10.5px;color:var(--text-muted)">${fd(a.data_andamento)}</span></div>
+      <div class="andb">${esc(a.descricao||'')}</div>
+    </div>`):'<div class="empty" style="padding:15px"><p>Nenhum andamento registrado</p></div>';
+  document.getElementById('ma-data').value=td();
+  document.getElementById('ma-txt').value='';
+  document.getElementById('m-andamento').dataset.pid=id;
+  om('m-andamento');
+}
+async function salvarAndamento(){
+  const pid=parseInt(document.getElementById('m-andamento').dataset.pid);
+  const desc=document.getElementById('ma-txt').value;
+  if(!desc){notif('Preencha a descrição',true);return;}
+  await put('andamentos',{processo_id:pid,tipo:'manual',descricao:desc,data_andamento:document.getElementById('ma-data').value,criado_em:new Date().toISOString()});
+  notif('Andamento registrado!');document.getElementById('ma-txt').value='';abrirProc(pid);
+}
+async function salvarProcesso(){
+  const id=document.getElementById('mp-id').value;
+  const d={numero:document.getElementById('mp-num').value,cliente_id:parseInt(document.getElementById('mp-cli').value)||null,area:document.getElementById('mp-area').value,vara:document.getElementById('mp-vara').value,tribunal:document.getElementById('mp-trib').value,comarca:document.getElementById('mp-comarca').value,tipo_acao:document.getElementById('mp-tipo').value,parte_contraria:document.getElementById('mp-parte').value,valor_causa:parseFloat(document.getElementById('mp-valor').value)||null,data_distribuicao:document.getElementById('mp-data').value||null,observacoes:document.getElementById('mp-obs').value,status:'ativo',criado_em:new Date().toISOString()};
+  if(!d.numero){notif('Informe o número CNJ',true);return;}
+  if(id)d.id=parseInt(id);
+  await put('processos',d);notif('Processo salvo!');cm('m-processo');renderProcs();
+}
 
-async function renderProcessos(busca=''){
-  let procs=await dbGetAll('processos');
-  const clis=await dbGetAll('clientes');
-  const cliMap=Object.fromEntries(clis.map(c=>[c.id,c]));
-  if(procFiltroStatus) procs=procs.filter(p=>p.status===procFiltroStatus);
-  if(procFiltroArea) procs=procs.filter(p=>p.area===procFiltroArea);
-  if(busca) procs=procs.filter(p=>(p.numero||'').includes(busca)||(cliMap[p.cliente_id]?.nome||'').toLowerCase().includes(busca.toLowerCase())||(p.tipo_acao||'').toLowerCase().includes(busca.toLowerCase()));
-  const el=document.getElementById('proc-list');
-  if(!procs.length){el.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="icon">📁</div><p>Nenhum processo</p></div>';return;}
-  el.innerHTML=procs.map(p=>{
-    const cli=cliMap[p.cliente_id];
-    const[sCls,s
+// ══════════════════════════════════════════════
+// CLIENTES
+// ══════════════════════════════════════════════
+async function renderClientes(b=''){
+  let cs=await ga('clientes');
+  if(b)cs=cs.filter(c=>(c.nome||'').toLowerCase().includes(b.toLowerCase())||(c.cpf_cnpj||'').includes(b));
+  cs.sort((a,c)=>a.nome?.localeCompare(c.nome||'')||0);
+  const ps=await ga('processos');
+  const el=document.getElementById('clilist');
+  if(!cs.length){el.innerHTML='<div class="empty"><div class="ei">👥</div><p>Nenhum cliente cadastrado</p></div>';return;}
+  el.innerHTML=cs.map(c=>{
+    const ini=c.nome.split(' ').slice(0,2).map(s=>s[0]||'').join('').toUpperCase().substring(0,2);
+    const np=ps.filter(p=>p.cliente_id===c.id).length;
+    return`<div class="li" onclick="editarCli(${c.id})">
+      <div class="av" style="font-size:12px;flex-shrink:0">${ini}</div>
+      <div style="flex:1;min-width:0">
+        <div class="it">${esc(c.nome)}</div>
+        <div class="is">${esc(c.cpf_cnpj||'—')} · ${esc(c.email||'—')} · ${esc(c.telefone||'—')}</div>
+      </div>
+      ${tg('tb',np+' proc.')}
+      <button class="btn bo bsm" onclick="event.stopPropagation();editarCli(${c.id})">✏️</button>
+    </div>`;}).join('');
+}
+function openModalCliente(){
+  document.getElementById('mc-id').value='';
+  document.getElementById('mc-title').textContent='Novo Cliente';
+  ['mc-nome','mc-cpf','mc-email','mc-tel','mc-end','mc-obs'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mc-cid').value='Maringá';
+  document.getElementById('mc-tipo').value='PF';
+  om('m-cliente');
+}
+async function editarCli(id){
+  const c=await gid('clientes',id);if(!c)return;
+  document.getElementById('mc-id').value=c.id;
+  document.getElementById('mc-title').textContent='Editar Cliente';
+  document.getElementById('mc-nome').value=c.nome||'';
+  document.getElementById('mc-cpf').value=c.cpf_cnpj||'';
+  document.getElementById('mc-tipo').value=c.tipo||'PF';
+  document.getElementById('mc-email').value=c.email||'';
+  document.getElementById('mc-tel').value=c.telefone||'';
+  document.getElementById('mc-end').value=c.endereco||'';
+  document.getElementById('mc-cid').value=c.cidade||'Maringá';
+  document.getElementById('mc-obs').value=c.observacoes||'';
+  om('m-cliente');
+}
+async function salvarCliente(){
+  const id=document.getElementById('mc-id').value;
+  const d={nome:document.getElementById('mc-nome').value,cpf_cnpj:document.getElementById('mc-cpf').value,tipo:document.getElementById('mc-tipo').value,email:document.getElementById('mc-email').value,telefone:document.getElementById('mc-tel').value,endereco:document.getElementById('mc-end').value,cidade:document.getElementById('mc-cid').value,observacoes:document.getElementById('mc-obs').value,criado_em:new Date().toISOString()};
+  if(!d.nome){notif('Informe o nome',true);return;}
+  if(id)d.id=parseInt(id);
+  await put('clientes',d);notif('Cliente salvo!');cm('m-cliente');renderClientes();
+}
+
+// ══════════════════════════════════════════════
+// CONTRATOS
+// ══════════════════════════════════════════════
+async function renderContratos(){
+  const cts=await ga('contratos');
+  const cs=await ga('clientes');
+  const cm2=Object.fromEntries(cs.map(c=>[c.id,c]));
+  const el=document.getElementById('ctlist');
+  if(!cts.length){el.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="ei">📝</div><p>Nenhum contrato</p></div>';return;}
+  el.innerHTML=cts.map(c=>{
+    const[sc,sl]=c.status==='ativo'?['tg','Ativo']:c.status==='renovar'?['to','Renovar']:['tgr',c.status||'—'];
+    const val=c.tipo==='exito'?`${c.percentual_exito||0}% êxito`:c.tipo==='misto'?`${fmt(c.valor)} + ${c.percentual_exito||0}%`:fmt(c.valor);
+    return`<div class="ctcard" onclick="editarCt(${c.id})">
+      <div class="cttop"><div class="cticon">📄</div>${tg(sc,sl)}</div>
+      <div class="cttit">${esc(c.titulo)}</div>
+      <div class="ctcli">👤 ${esc(cm2[c.cliente_id]?.nome||'—')}</div>
+      <div class="ctfooter"><div class="ctval">${esc(val)}</div><div style="font-size:10.5px;color:var(--text-muted)">Até: ${fd(c.data_fim)||'Aberto'}</div></div>
+    </div>`;}).join('');
+}
+async function openModalContrato(){
+  document.getElementById('mct-id').value='';
+  document.getElementById('mct-title').textContent='Novo Contrato';
+  ['mct-tit','mct-val','mct-exit','mct-ini','mct-fim','mct-obs'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('mct-st').value='ativo';
+  await fillClis('mct-cli');await fillProcs('mct-proc');om('m-contrato');
+}
+async function editarCt(id){
+  const c=await gid('contratos',id);if(!c)return;
+  document.getElementById('mct-id').value=c.id;
+  document.getElementById('mct-title').textContent='Editar Contrato';
+  document.getElementById('mct-tit').value=c.titulo||'';
+  document.getElementById('mct-tipo').value=c.tipo||'honorarios_fixos';
+  document.getElementById('mct-st').value=c.status||'ativo';
+  document.getElementById('mct-val').value=c.valor||'';
+  document.getElementById('mct-exit').value=c.percentual_exito||'';
+  document.getElementById('mct-ini').value=c.data_inicio||'';
+  document.getElementById('mct-fim').value=c.data_fim||'';
+  document.getElementById('mct-obs').value=c.observacoes||'';
+  await fillClis('mct-cli',c.cliente_id);await fillProcs('mct-proc',c.processo_id);om('m-contrato');
+}
+async function salvarContrato(){
+  const id=document.getElementById('mct-id').value;
+  const d={titulo:document.getElementById('mct-tit').value,cliente_id:parseInt(document.getElementById('mct-cli').value)||null,processo_id:parseInt(document.getElementById('mct-proc').value)||null,tipo:document.getElementById('mct-tipo').value,status:document.getElementById('mct-st').value,valor:parseFloat(document.getElementById('mct-val').value)||null,percentual_exito:parseFloat(document.getElementById('mct-exit').value)||null,data_inicio:document.getElementById('mct-ini').value||null,data_fim:document.getElementById('mct-fim').value||null,observacoes:document.getElementById('mct-obs').value,criado_em:new Date().toISOString()};
+  if(!d.titulo){notif('Informe o título',true);return;}
+  if(id)d.id=parseInt(id);
+  await put('contratos',d);notif('Contrato salvo!');cm('m-contrato');renderContratos();
+}
+
+// ══════════════════════════════════════════════
+// FINANCEIRO
+// ══════════════════════════════════════════════
+let FFIL='';
+async function loadFin(){
+  let lans=await ga('financeiro');
+  lans.sort((a,b)=>(b.criado_em||'').localeCompare(a.criado_em||''));
+  const mi=td().slice(0,7)+'-01';
+  const rec=lans.filter(f=>f.tipo==='receita');
+  const t={rm:rec.filter(f=>f.status==='pago'&&(f.data_pagamento||'')>=mi).reduce((s,f)=>s+Number(f.valor||0),0),ar:rec.filter(f=>f.status==='pendente').reduce((s,f)=>s+Number(f.valor||0),0),vd:rec.filter(f=>f.status==='pendente'&&f.data_vencimento&&f.data_vencimento<td()).reduce((s,f)=>s+Number(f.valor||0),0),ta:rec.filter(f=>f.status==='pago'&&(f.data_pagamento||'').startsWith(String(new Date().getFullYear()))).reduce((s,f)=>s+Number(f.valor||0),0)};
+  document.getElementById('finstats').innerHTML=`
+    <div class="sc cs"><div class="sl">Recebido (Mês)</div><div class="sv sm">${fmt(t.rm)}</div><div class="si">✅</div></div>
+    <div class="sc"><div class="sl">A Receber</div><div class="sv sm">${fmt(t.ar)}</div><div class="si">⏳</div></div>
+    <div class="sc ${t.vd>0?'cd':''}"><div class="sl">Vencidos</div><div class="sv sm">${fmt(t.vd)}</div><div class="si">⚠️</div></div>
+    <div class="sc"><div class="sl">Total ${new Date().getFullYear()}</div><div class="sv sm">${fmt(t.ta)}</div><div class="si">💰</div></div>`;
+  let fl=lans;
+  if(FFIL==='receita')fl=fl.filter(f=>f.tipo==='receita');
+  else if(FFIL==='despesa')fl=fl.filter(f=>f.tipo==='despesa');
+  else if(FFIL==='pendente')fl=fl.filter(f=>f.status==='pendente');
+  else if(FFIL==='pago')fl=fl.filter(f=>f.status==='pago');
+  const cs=await ga('clientes');
+  const cm3=Object.fromEntries(cs.map(c=>[c.id,c]));
+  const el=document.getElementById('finlist');
+  if(!fl.length){el.innerHTML='<div class="empty"><div class="ei">💰</div><p>Nenhum lançamento</p></div>';return;}
+  el.innerHTML=fl.map(f=>{
+    const ir=f.tipo==='receita';
+    const sc=f.status==='pago'?'tg':'to';
+    return`<div class="li">
+      ${tg(sc,f.status==='pago'?'Pago':'Pendente')}
+      <div style="flex:1;min-width:0">
+        <div class="it" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(f.descricao)}</div>
+        <div class="is">${fd(f.data_lancamento||'')} ${f.cliente_id&&cm3[f.cliente_id]?'· '+esc(cm3[f.cliente_id].nome):''} ${f.data_vencimento?'· Vence: '+fd(f.data_vencimento):''}</div>
+      </div>
+      <div style="font-weight:700;font-size:13.5px;color:${ir?'var(--success)':'var(--danger)'};flex-shrink:0">${ir?'+':'-'}${fmt(f.valor)}</div>
+      ${f.status==='pendente'&&ir?`<button class="btn bs bsm" onclick="mkPago(${f.id})">✓ Pago</button>`:''}
+    </div>`;}).join('');
+}
+function ffin(t,b){FFIL=t;document.querySelectorAll('#panel-financeiro .fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');loadFin();}
+async function mkPago(id){const f=await gid('financeiro',id);if(!f)return;f.status='pago';f.data_pagamento=td();await put('financeiro',f);notif('Marcado como pago!');loadFin();loadDash();}
+async function openModalLancamento(){
+  document.getElementById('ml-desc').value='';
+  document.getElementById('ml-val').value='';
+  document.getElementById('ml-data').value=td();
+  document.getElementById('ml-venc').value='';
+  document.getElementById('ml-tipo').value='receita';
+  document.getElementById('ml-st').value='pendente';
+  await fillClis('ml-cli');await fillProcs('ml-proc');om('m-lanc');
+}
+async function salvarLanc(){
+  const d={descricao:document.getElementById('ml-desc').value,tipo:document.getElementById('ml-tipo').value,categoria:document.getElementById('ml-cat').value,valor:parseFloat(document.getElementById('ml-val').value),status:document.getElementById('ml-st').value,data_lancamento:document.getElementById('ml-data').value||td(),data_vencimento:document.getElementById('ml-venc').value||null,data_pagamento:document.getElementById('ml-st').value==='pago'?td():null,cliente_id:parseInt(document.getElementById('ml-cli').value)||null,processo_id:parseInt(document.getElementById('ml-proc').value)||null,criado_em:new Date().toISOString()};
+  if(!d.descricao||!d.valor){notif('Preencha descrição e valor',true);return;}
+  await put('financeiro',d);notif('Lançado!');cm('m-lanc');loadFin();
+}
+
+// ══════════════════════════════════════════════
+// CONFIG / BACKUP
+// ══════════════════════════════════════════════
+async function salvarCfg(){
+  await put('cfg',{id:1,nome:document.getElementById('cfg-nome').value,oab:document.getElementById('cfg-oab').value,email:document.getElementById('cfg-email').value});
+  notif('Configurações salvas!');
+}
+async function exportar(){
+  const stores=['clientes','processos','andamentos','agenda','publicacoes','contratos','financeiro'];
+  const bk={v:3,data:new Date().toISOString(),dados:{}};
+  for(const s of stores)bk.dados[s]=await ga(s);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(bk,null,2)],{type:'application/json'}));
+  a.download=`backup_abucarma_${td()}.json`;a.click();
+  notif('Backup exportado!');
+}
+async function importar(inp){
+  if(!inp.files[0])return;
+  const r=new FileReader();
+  r.onload=async function(e){
+    try{
+      const bk=JSON.parse(e.target.result);
+      if(!bk.dados){notif('Arquivo inválido',true);return;}
+      if(!confirm('Isso substituirá todos os dados atuais. Confirma?'))return;
+      for(const[store,itens] of Object.entries(bk.dados)){
+        const tx=DB.transaction(store,'readwrite');
+        tx.objectStore(store).clear();
+        await new Promise(res=>tx.oncomplete=res);
+        for(const item of itens)await put(store,item);
+      }
+      notif('Backup importado com sucesso!');setTimeout(()=>loadDash(),600);
+    }catch(err){notif('Erro: '+err.message,true);}
+  };
+  r.readAsText(inp.files[0]);inp.value='';
+}
+
+// ══════════════════════════════════════════════
+// SELECTS AUXILIARES
+// ══════════════════════════════════════════════
+async function fillClis(sid,sv=null){
+  const cs=await ga('clientes');
+  cs.sort((a,b)=>a.nome?.localeCompare(b.nome||'')||0);
+  const el=document.getElementById(sid);
+  if(el)el.innerHTML='<option value="">— selecione —</option>'+cs.map(c=>`<option value="${c.id}"${c.id===sv?' selected':''}>${esc(c.nome)}</option>`).join('');
+}
+async function fillProcs(sid,sv=null){
+  const ps=await ga('processos');
+  const el=document.getElementById(sid);
+  if(el)el.innerHTML='<option value="">— nenhum —</option>'+ps.map(p=>`<option value="${p.id}"${p.id===sv?' selected':''}>${esc(p.numero)}</option>`).join('');
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+(async()=>{
+  await abrirDB();
+  const cfg=await gid('cfg',1);
+  if(cfg){
+    if(cfg.nome)document.getElementById('cfg-nome').value=cfg.nome;
+    if(cfg.oab)document.getElementById('cfg-oab').value=cfg.oab;
+    if(cfg.email)document.getElementById('cfg-email').value=cfg.email;
+  }
+  await loadDash();
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>if(typeof pdfjsLib!=='undefined'){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';window.pdfjsLib=pdfjsLib;}</script>
+</body>
+</html>
